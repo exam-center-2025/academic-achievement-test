@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>학업성취도 검사 플로우</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background: #f8f9fa;
+            padding: 40px 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            background: white;
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+        }
+
+        h1 {
+            text-align: center;
+            color: #1a1a2e;
+            margin-bottom: 50px;
+            font-size: 24px;
+            font-weight: 600;
+        }
+
+        /* Flow Section */
+        .flow-section {
+            margin-bottom: 60px;
+        }
+
+        .flow-title {
+            font-size: 18px;
+            color: #495057;
+            margin-bottom: 30px;
+            font-weight: 600;
+            padding-left: 10px;
+            border-left: 4px solid #667eea;
+        }
+
+        /* Flow Container */
+        .flow-container {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-bottom: 40px;
+        }
+
+        /* Flow Box */
+        .flow-box {
+            background: #f8f9fa;
+            border: 2px solid #dee2e6;
+            border-radius: 8px;
+            padding: 16px 28px;
+            font-size: 16px;
+            font-weight: 500;
+            color: #1a1a2e;
+            position: relative;
+            transition: all 0.3s ease;
+            min-width: 120px;
+            text-align: center;
+        }
+
+        .flow-box:hover {
+            background: #e9ecef;
+            border-color: #667eea;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        .flow-box.highlight {
+            background: #e7f5ff;
+            border-color: #339af0;
+            color: #1864ab;
+        }
+
+        /* Arrow */
+        .arrow {
+            color: #adb5bd;
+            font-size: 24px;
+            line-height: 1;
+            flex-shrink: 0;
+        }
+
+        /* Different flow types */
+        .student-flow .flow-box {
+            background: #f3f0ff;
+            border-color: #e5dbff;
+        }
+
+        .student-flow .flow-box:hover {
+            background: #e5dbff;
+            border-color: #9775fa;
+        }
+
+        .teacher-flow .flow-box {
+            background: #e7f5ff;
+            border-color: #a5d8ff;
+        }
+
+        .teacher-flow .flow-box:hover {
+            background: #a5d8ff;
+            border-color: #339af0;
+        }
+
+        .admin-flow .flow-box {
+            background: #f3fae8;
+            border-color: #d3f9d8;
+        }
+
+        .admin-flow .flow-box:hover {
+            background: #d3f9d8;
+            border-color: #51cf66;
+        }
+
+        /* Legend */
+        .legend {
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 1px solid #e9ecef;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .legend-box {
+            width: 20px;
+            height: 20px;
+            border: 2px solid;
+            border-radius: 4px;
+        }
+
+        .legend-text {
+            font-size: 14px;
+            color: #6c757d;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 30px 20px;
+            }
+
+            .flow-container {
+                gap: 15px;
+            }
+
+            .flow-box {
+                padding: 12px 20px;
+                font-size: 14px;
+                min-width: 100px;
+            }
+
+            .arrow {
+                font-size: 20px;
+            }
+
+            .legend {
+                flex-direction: column;
+                gap: 15px;
+                align-items: center;
+            }
+        }
+
+        /* Special styling for main process */
+        .main-flow {
+            background: #fff;
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+
+        .main-flow .flow-container {
+            margin-bottom: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>학업성취도 검사 시스템 플로우</h1>
+
+        <!-- Main Process Flow -->
+        <div class="flow-section">
+            <h2 class="flow-title">학생 시험 응시 프로세스</h2>
+            <div class="main-flow student-flow">
+                <div class="flow-container">
+                    <div class="flow-box">학생로그인</div>
+                    <div class="arrow">→</div>
+                    <div class="flow-box highlight">정보확인<br>(최초1회)</div>
+                    <div class="arrow">→</div>
+                    <div class="flow-box">시험목록</div>
+                    <div class="arrow">→</div>
+                    <div class="flow-box">시험선택</div>
+                    <div class="arrow">→</div>
+                    <div class="flow-box">시험</div>
+                    <div class="arrow">→</div>
+                    <div class="flow-box">제출</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Teacher Process Flow -->
+        <div class="flow-section">
+            <h2 class="flow-title">교사 로그인 프로세스</h2>
+            <div class="teacher-flow">
+                <div class="flow-container">
+                    <div class="flow-box">리서치 로그인</div>
+                    <div class="arrow">→</div>
+                    <div class="flow-box">집계표</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Admin Process Flow -->
+        <div class="flow-section">
+            <h2 class="flow-title">학교관리자 로그인 프로세스</h2>
+            <div class="admin-flow">
+                <div class="flow-container">
+                    <div class="flow-box">학교관리자 로그인</div>
+                    <div class="arrow">→</div>
+                    <div class="flow-box">집계표</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Legend -->
+        <div class="legend">
+            <div class="legend-item">
+                <div class="legend-box" style="background: #f3f0ff; border-color: #e5dbff;"></div>
+                <span class="legend-text">학생 프로세스</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-box" style="background: #e7f5ff; border-color: #a5d8ff;"></div>
+                <span class="legend-text">교사 프로세스</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-box" style="background: #f3fae8; border-color: #d3f9d8;"></div>
+                <span class="legend-text">관리자 프로세스</span>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
