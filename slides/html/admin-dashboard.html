@@ -1,347 +1,738 @@
 <!DOCTYPE html>
 <html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>학업성취도 검사 - 진행현황</title>
-    
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
-    
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        'sans': ['Inter', 'Noto Sans KR', 'system-ui', '-apple-system', 'sans-serif'],
-                    }
-                }
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>학업성취도 검사 - 진행현황</title>
+
+        <!-- Tailwind CSS -->
+        <script src="https://cdn.tailwindcss.com"></script>
+
+        <!-- Google Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;700&display=swap"
+            rel="stylesheet"
+        />
+
+        <script>
+            tailwind.config = {
+                theme: {
+                    extend: {
+                        fontFamily: {
+                            sans: [
+                                "Inter",
+                                "Noto Sans KR",
+                                "system-ui",
+                                "-apple-system",
+                                "sans-serif",
+                            ],
+                        },
+                    },
+                },
             }
-        }
-    </script>
-</head>
-<body class="bg-gray-50 font-sans antialiased">
-    <!-- Header -->
-    <header class="bg-white border-b border-gray-200 sticky top-0 z-20">
-        <div class="px-6 py-4">
-            <div class="flex items-center justify-between">
-                <div>
-                    <h1 class="text-2xl font-bold text-gray-900">학업성취도 검사 진행현황</h1>
-                    <p class="text-sm text-gray-600 mt-1">디지털교육 성과 진단 및 효과 분석 연구</p>
-                </div>
-                <div class="flex items-center space-x-3">
-                    <span class="text-sm text-gray-500">관리자</span>
-                    <button onclick="handleLogout()" class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 transition-colors">
-                        로그아웃
-                    </button>
-                </div>
-            </div>
-        </div>
-    </header>
-
-    <!-- Main Content -->
-    <main class="p-6">
-        <!-- Summary Cards -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-            <div class="bg-white rounded-lg border border-gray-200 p-6">
-                <div class="flex items-center justify-between mb-2">
-                    <span class="text-sm font-medium text-gray-600">전체 응시자</span>
-                    <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
-                    </svg>
-                </div>
-                <div class="flex items-baseline">
-                    <span class="text-3xl font-bold text-gray-900" id="totalStudents">15</span>
-                    <span class="ml-1 text-sm text-gray-600">명</span>
+        </script>
+    </head>
+    <body class="bg-gray-50 font-sans antialiased">
+        <!-- Header -->
+        <header class="bg-white border-b border-gray-200 sticky top-0 z-20">
+            <div class="px-6 py-4">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h1 class="text-2xl font-bold text-gray-900">
+                            학업성취도 검사 진행현황
+                        </h1>
+                        <p class="text-sm text-gray-600 mt-1">
+                            디지털교육 성과 진단 및 효과 분석 연구
+                        </p>
+                    </div>
+                    <div class="flex items-center space-x-3">
+                        <span class="text-sm text-gray-500">관리자</span>
+                        <button
+                            onclick="handleLogout()"
+                            class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 transition-colors"
+                        >
+                            로그아웃
+                        </button>
+                    </div>
                 </div>
             </div>
+        </header>
 
-            <div class="bg-white rounded-lg border border-gray-200 p-6">
-                <div class="flex items-center justify-between mb-2">
-                    <span class="text-sm font-medium text-gray-600">완료</span>
-                    <svg class="w-5 h-5 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                    </svg>
+        <!-- Main Content -->
+        <main class="p-6">
+            <!-- Summary Cards -->
+            <div
+                class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6"
+            >
+                <div class="bg-white rounded-lg border border-gray-200 p-6">
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="text-sm font-medium text-gray-600"
+                            >전체 응시자</span
+                        >
+                        <svg
+                            class="w-5 h-5 text-gray-400"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
+                            ></path>
+                        </svg>
+                    </div>
+                    <div class="flex items-baseline">
+                        <span
+                            class="text-3xl font-bold text-gray-900"
+                            id="totalStudents"
+                            >15</span
+                        >
+                        <span class="ml-1 text-sm text-gray-600">명</span>
+                    </div>
                 </div>
-                <div class="flex items-baseline">
-                    <span class="text-3xl font-bold text-gray-900" id="completedStudents">5</span>
-                    <span class="ml-1 text-sm text-gray-600">명</span>
+
+                <div class="bg-white rounded-lg border border-gray-200 p-6">
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="text-sm font-medium text-gray-600"
+                            >완료</span
+                        >
+                        <svg
+                            class="w-5 h-5 text-green-500"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                            ></path>
+                        </svg>
+                    </div>
+                    <div class="flex items-baseline">
+                        <span
+                            class="text-3xl font-bold text-gray-900"
+                            id="completedStudents"
+                            >5</span
+                        >
+                        <span class="ml-1 text-sm text-gray-600">명</span>
+                    </div>
+                    <div class="mt-2">
+                        <div class="w-full bg-gray-200 rounded-full h-1">
+                            <div
+                                class="bg-green-500 h-1 rounded-full"
+                                style="width: 33.33%"
+                            ></div>
+                        </div>
+                    </div>
                 </div>
-                <div class="mt-2">
-                    <div class="w-full bg-gray-200 rounded-full h-1">
-                        <div class="bg-green-500 h-1 rounded-full" style="width: 33.33%"></div>
+
+                <div class="bg-white rounded-lg border border-gray-200 p-6">
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="text-sm font-medium text-gray-600"
+                            >진행중</span
+                        >
+                        <svg
+                            class="w-5 h-5 text-blue-500"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                            ></path>
+                        </svg>
+                    </div>
+                    <div class="flex items-baseline">
+                        <span
+                            class="text-3xl font-bold text-gray-900"
+                            id="inProgressStudents"
+                            >5</span
+                        >
+                        <span class="ml-1 text-sm text-gray-600">명</span>
+                    </div>
+                    <div class="mt-2">
+                        <div class="w-full bg-gray-200 rounded-full h-1">
+                            <div
+                                class="bg-blue-500 h-1 rounded-full"
+                                style="width: 33.33%"
+                            ></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-lg border border-gray-200 p-6">
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="text-sm font-medium text-gray-600"
+                            >미응시</span
+                        >
+                        <svg
+                            class="w-5 h-5 text-gray-400"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                            ></path>
+                        </svg>
+                    </div>
+                    <div class="flex items-baseline">
+                        <span
+                            class="text-3xl font-bold text-gray-900"
+                            id="notStartedStudents"
+                            >5</span
+                        >
+                        <span class="ml-1 text-sm text-gray-600">명</span>
+                    </div>
+                    <div class="mt-2">
+                        <div class="w-full bg-gray-200 rounded-full h-1">
+                            <div
+                                class="bg-gray-400 h-1 rounded-full"
+                                style="width: 33.33%"
+                            ></div>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <div class="bg-white rounded-lg border border-gray-200 p-6">
-                <div class="flex items-center justify-between mb-2">
-                    <span class="text-sm font-medium text-gray-600">진행중</span>
-                    <svg class="w-5 h-5 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                    </svg>
-                </div>
-                <div class="flex items-baseline">
-                    <span class="text-3xl font-bold text-gray-900" id="inProgressStudents">5</span>
-                    <span class="ml-1 text-sm text-gray-600">명</span>
-                </div>
-                <div class="mt-2">
-                    <div class="w-full bg-gray-200 rounded-full h-1">
-                        <div class="bg-blue-500 h-1 rounded-full" style="width: 33.33%"></div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="bg-white rounded-lg border border-gray-200 p-6">
-                <div class="flex items-center justify-between mb-2">
-                    <span class="text-sm font-medium text-gray-600">미응시</span>
-                    <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                    </svg>
-                </div>
-                <div class="flex items-baseline">
-                    <span class="text-3xl font-bold text-gray-900" id="notStartedStudents">5</span>
-                    <span class="ml-1 text-sm text-gray-600">명</span>
-                </div>
-                <div class="mt-2">
-                    <div class="w-full bg-gray-200 rounded-full h-1">
-                        <div class="bg-gray-400 h-1 rounded-full" style="width: 33.33%"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Filter and Table Section -->
-        <div class="bg-white rounded-lg border border-gray-200">
-            <!-- Filter Header -->
-            <div class="border-b border-gray-200 p-4">
-                <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
-                    <h2 class="text-lg font-semibold text-gray-900">응시자 명단</h2>
-                    <div class="flex flex-wrap gap-3">
-                        <div class="flex items-center border border-gray-300 rounded-md focus-within:ring-2 focus-within:ring-blue-500 focus-within:border-transparent">
-                            <span class="px-3 text-sm font-medium text-gray-600 bg-gray-50 border-r border-gray-300">학교</span>
-                            <input 
-                                type="text" 
-                                id="schoolFilter"
-                                class="w-32 px-3 py-2 text-sm focus:outline-none"
-                                placeholder="전체">
-                        </div>
-                        <div class="flex items-center border border-gray-300 rounded-md focus-within:ring-2 focus-within:ring-blue-500 focus-within:border-transparent">
-                            <span class="px-3 text-sm font-medium text-gray-600 bg-gray-50 border-r border-gray-300">학년</span>
-                            <input 
-                                type="text" 
-                                id="gradeFilter"
-                                class="w-20 px-3 py-2 text-sm focus:outline-none"
-                                placeholder="전체">
-                        </div>
-                        <div class="flex items-center border border-gray-300 rounded-md focus-within:ring-2 focus-within:ring-blue-500 focus-within:border-transparent">
-                            <span class="px-3 text-sm font-medium text-gray-600 bg-gray-50 border-r border-gray-300">반</span>
-                            <input 
-                                type="text" 
-                                id="classFilter"
-                                class="w-20 px-3 py-2 text-sm focus:outline-none"
-                                placeholder="전체">
-                        </div>
-                        <div class="flex items-center border border-gray-300 rounded-md focus-within:ring-2 focus-within:ring-blue-500 focus-within:border-transparent flex-1 min-w-[200px]">
-                            <span class="px-3 text-sm font-medium text-gray-600 bg-gray-50 border-r border-gray-300">이름</span>
-                            <div class="relative flex-1">
-                                <input 
-                                    type="text" 
-                                    id="searchInput"
-                                    class="w-full pl-8 pr-3 py-2 text-sm focus:outline-none"
-                                    placeholder="검색">
-                                <svg class="absolute left-2.5 top-2.5 w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-                                </svg>
+            <!-- Filter and Table Section -->
+            <div class="bg-white rounded-lg border border-gray-200">
+                <!-- Filter Header -->
+                <div class="border-b border-gray-200 p-4">
+                    <div
+                        class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4"
+                    >
+                        <h2 class="text-lg font-semibold text-gray-900">
+                            응시자 명단
+                        </h2>
+                        <div class="flex flex-wrap gap-3">
+                            <div
+                                class="flex items-center border border-gray-300 rounded-md focus-within:ring-2 focus-within:ring-blue-500 focus-within:border-transparent"
+                            >
+                                <span
+                                    class="px-3 text-sm font-medium text-gray-600 bg-gray-50 border-r border-gray-300"
+                                    >학교</span
+                                >
+                                <input
+                                    type="text"
+                                    id="schoolFilter"
+                                    class="w-32 px-3 py-2 text-sm focus:outline-none"
+                                    placeholder="전체"
+                                />
+                            </div>
+                            <div
+                                class="flex items-center border border-gray-300 rounded-md focus-within:ring-2 focus-within:ring-blue-500 focus-within:border-transparent"
+                            >
+                                <span
+                                    class="px-3 text-sm font-medium text-gray-600 bg-gray-50 border-r border-gray-300"
+                                    >학년</span
+                                >
+                                <input
+                                    type="text"
+                                    id="gradeFilter"
+                                    class="w-20 px-3 py-2 text-sm focus:outline-none"
+                                    placeholder="전체"
+                                />
+                            </div>
+                            <div
+                                class="flex items-center border border-gray-300 rounded-md focus-within:ring-2 focus-within:ring-blue-500 focus-within:border-transparent"
+                            >
+                                <span
+                                    class="px-3 text-sm font-medium text-gray-600 bg-gray-50 border-r border-gray-300"
+                                    >반</span
+                                >
+                                <input
+                                    type="text"
+                                    id="classFilter"
+                                    class="w-20 px-3 py-2 text-sm focus:outline-none"
+                                    placeholder="전체"
+                                />
+                            </div>
+                            <div
+                                class="flex items-center border border-gray-300 rounded-md focus-within:ring-2 focus-within:ring-blue-500 focus-within:border-transparent flex-1 min-w-[200px]"
+                            >
+                                <span
+                                    class="px-3 text-sm font-medium text-gray-600 bg-gray-50 border-r border-gray-300"
+                                    >이름</span
+                                >
+                                <div class="relative flex-1">
+                                    <input
+                                        type="text"
+                                        id="searchInput"
+                                        class="w-full pl-8 pr-3 py-2 text-sm focus:outline-none"
+                                        placeholder="검색"
+                                    />
+                                    <svg
+                                        class="absolute left-2.5 top-2.5 w-4 h-4 text-gray-400"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        viewBox="0 0 24 24"
+                                    >
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            stroke-width="2"
+                                            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                                        ></path>
+                                    </svg>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- Table Header -->
-            <div class="px-4 py-3 bg-gray-50 border-b border-gray-200 flex items-center justify-between">
-                <div class="text-sm text-gray-700">
-                    총 <span class="font-semibold" id="totalCount">0</span>건
+                <!-- Table Header -->
+                <div
+                    class="px-4 py-3 bg-gray-50 border-b border-gray-200 flex items-center justify-between"
+                >
+                    <div class="text-sm text-gray-700">
+                        총
+                        <span class="font-semibold" id="totalCount">0</span>건
+                    </div>
+                    <button
+                        onclick="downloadExcel()"
+                        class="inline-flex items-center px-3 py-1.5 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                    >
+                        <svg
+                            class="w-4 h-4 mr-1.5"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M9 19l3 3m0 0l3-3m-3 3V10"
+                            ></path>
+                        </svg>
+                        엑셀 다운로드
+                    </button>
                 </div>
-                <button onclick="downloadExcel()" class="inline-flex items-center px-3 py-1.5 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
-                    <svg class="w-4 h-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M9 19l3 3m0 0l3-3m-3 3V10"></path>
-                    </svg>
-                    엑셀 다운로드
-                </button>
+
+                <!-- Table -->
+                <div class="overflow-x-auto">
+                    <table class="w-full">
+                        <thead class="bg-gray-50 border-b border-gray-200">
+                            <tr>
+                                <th
+                                    class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                                >
+                                    ID
+                                </th>
+                                <th
+                                    class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                                >
+                                    학교
+                                </th>
+                                <th
+                                    class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                                >
+                                    학년
+                                </th>
+                                <th
+                                    class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                                >
+                                    반
+                                </th>
+                                <th
+                                    class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                                >
+                                    번호
+                                </th>
+                                <th
+                                    class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                                >
+                                    이름
+                                </th>
+                                <th
+                                    class="px-4 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider"
+                                >
+                                    영어
+                                </th>
+                                <th
+                                    class="px-4 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider"
+                                >
+                                    수학
+                                </th>
+                                <th
+                                    class="px-4 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider"
+                                >
+                                    상태
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody
+                            id="tableBody"
+                            class="bg-white divide-y divide-gray-200"
+                        >
+                            <!-- 동적으로 생성됨 -->
+                        </tbody>
+                    </table>
+                </div>
             </div>
+        </main>
 
-            <!-- Table -->
-            <div class="overflow-x-auto">
-                <table class="w-full">
-                    <thead class="bg-gray-50 border-b border-gray-200">
-                        <tr>
-                            <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ID</th>
-                            <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">학교</th>
-                            <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">학년</th>
-                            <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">반</th>
-                            <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">번호</th>
-                            <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">이름</th>
-                            <th class="px-4 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">영어</th>
-                            <th class="px-4 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">수학</th>
-                            <th class="px-4 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">상태</th>
-                        </tr>
-                    </thead>
-                    <tbody id="tableBody" class="bg-white divide-y divide-gray-200">
-                        <!-- 동적으로 생성됨 -->
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </main>
+        <script>
+            // Sample data
+            const studentData = [
+                {
+                    id: "1001",
+                    school: "한국초",
+                    grade: "3",
+                    class: "1",
+                    number: "1",
+                    name: "허선",
+                    english: "completed",
+                    math: "not-started",
+                    status: "진행중",
+                },
+                {
+                    id: "1001",
+                    school: "한국초",
+                    grade: "3",
+                    class: "1",
+                    number: "2",
+                    name: "박종경",
+                    english: "not-started",
+                    math: "not-started",
+                    status: "미시작",
+                },
+                {
+                    id: "1002",
+                    school: "한국초",
+                    grade: "3",
+                    class: "1",
+                    number: "3",
+                    name: "김민수",
+                    english: "completed",
+                    math: "completed",
+                    status: "완료",
+                },
+                {
+                    id: "1003",
+                    school: "한국초",
+                    grade: "3",
+                    class: "1",
+                    number: "4",
+                    name: "이지은",
+                    english: "completed",
+                    math: "not-started",
+                    status: "진행중",
+                },
+                {
+                    id: "1004",
+                    school: "한국초",
+                    grade: "3",
+                    class: "2",
+                    number: "1",
+                    name: "최진우",
+                    english: "not-started",
+                    math: "not-started",
+                    status: "미시작",
+                },
+                {
+                    id: "1005",
+                    school: "한국초",
+                    grade: "3",
+                    class: "2",
+                    number: "2",
+                    name: "정서연",
+                    english: "completed",
+                    math: "completed",
+                    status: "완료",
+                },
+                {
+                    id: "1006",
+                    school: "한국초",
+                    grade: "4",
+                    class: "1",
+                    number: "1",
+                    name: "강민준",
+                    english: "completed",
+                    math: "not-started",
+                    status: "진행중",
+                },
+                {
+                    id: "1007",
+                    school: "한국초",
+                    grade: "4",
+                    class: "1",
+                    number: "2",
+                    name: "윤서진",
+                    english: "not-started",
+                    math: "not-started",
+                    status: "미시작",
+                },
+                {
+                    id: "1008",
+                    school: "한국초",
+                    grade: "4",
+                    class: "1",
+                    number: "3",
+                    name: "임하준",
+                    english: "completed",
+                    math: "completed",
+                    status: "완료",
+                },
+                {
+                    id: "1009",
+                    school: "한국초",
+                    grade: "4",
+                    class: "2",
+                    number: "1",
+                    name: "송민지",
+                    english: "completed",
+                    math: "not-started",
+                    status: "진행중",
+                },
+                {
+                    id: "1010",
+                    school: "서울초",
+                    grade: "3",
+                    class: "1",
+                    number: "1",
+                    name: "장서준",
+                    english: "not-started",
+                    math: "not-started",
+                    status: "미시작",
+                },
+                {
+                    id: "1011",
+                    school: "서울초",
+                    grade: "3",
+                    class: "1",
+                    number: "2",
+                    name: "한지민",
+                    english: "completed",
+                    math: "completed",
+                    status: "완료",
+                },
+                {
+                    id: "1012",
+                    school: "서울초",
+                    grade: "3",
+                    class: "2",
+                    number: "1",
+                    name: "오준서",
+                    english: "completed",
+                    math: "not-started",
+                    status: "진행중",
+                },
+                {
+                    id: "1013",
+                    school: "서울초",
+                    grade: "4",
+                    class: "1",
+                    number: "1",
+                    name: "류다은",
+                    english: "not-started",
+                    math: "not-started",
+                    status: "미시작",
+                },
+                {
+                    id: "1014",
+                    school: "서울초",
+                    grade: "4",
+                    class: "1",
+                    number: "2",
+                    name: "백승호",
+                    english: "completed",
+                    math: "completed",
+                    status: "완료",
+                },
+            ]
 
-    <script>
-        // Sample data
-        const studentData = [
-            { id: '1001', school: '한국초', grade: '3', class: '1', number: '1', name: '허선', english: 'completed', math: 'not-started', status: '진행중' },
-            { id: '1001', school: '한국초', grade: '3', class: '1', number: '2', name: '박종경', english: 'not-started', math: 'not-started', status: '미시작' },
-            { id: '1002', school: '한국초', grade: '3', class: '1', number: '3', name: '김민수', english: 'completed', math: 'completed', status: '완료' },
-            { id: '1003', school: '한국초', grade: '3', class: '1', number: '4', name: '이지은', english: 'completed', math: 'not-started', status: '진행중' },
-            { id: '1004', school: '한국초', grade: '3', class: '2', number: '1', name: '최진우', english: 'not-started', math: 'not-started', status: '미시작' },
-            { id: '1005', school: '한국초', grade: '3', class: '2', number: '2', name: '정서연', english: 'completed', math: 'completed', status: '완료' },
-            { id: '1006', school: '한국초', grade: '4', class: '1', number: '1', name: '강민준', english: 'completed', math: 'not-started', status: '진행중' },
-            { id: '1007', school: '한국초', grade: '4', class: '1', number: '2', name: '윤서진', english: 'not-started', math: 'not-started', status: '미시작' },
-            { id: '1008', school: '한국초', grade: '4', class: '1', number: '3', name: '임하준', english: 'completed', math: 'completed', status: '완료' },
-            { id: '1009', school: '한국초', grade: '4', class: '2', number: '1', name: '송민지', english: 'completed', math: 'not-started', status: '진행중' },
-            { id: '1010', school: '서울초', grade: '3', class: '1', number: '1', name: '장서준', english: 'not-started', math: 'not-started', status: '미시작' },
-            { id: '1011', school: '서울초', grade: '3', class: '1', number: '2', name: '한지민', english: 'completed', math: 'completed', status: '완료' },
-            { id: '1012', school: '서울초', grade: '3', class: '2', number: '1', name: '오준서', english: 'completed', math: 'not-started', status: '진행중' },
-            { id: '1013', school: '서울초', grade: '4', class: '1', number: '1', name: '류다은', english: 'not-started', math: 'not-started', status: '미시작' },
-            { id: '1014', school: '서울초', grade: '4', class: '1', number: '2', name: '백승호', english: 'completed', math: 'completed', status: '완료' }
-        ];
+            // Status badge helper
+            function getStatusBadge(status) {
+                const badges = {
+                    completed:
+                        '<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">완료</span>',
+                    "not-started":
+                        '<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">미완료</span>',
+                }
+                return badges[status] || badges["not-started"]
+            }
 
-        // Status badge helper
-        function getStatusBadge(status) {
-            const badges = {
-                'completed': '<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">완료</span>',
-                'not-started': '<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">미완료</span>'
-            };
-            return badges[status] || badges['not-started'];
-        }
+            // Overall status badge helper
+            function getOverallStatusBadge(status) {
+                const badges = {
+                    완료: '<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">완료</span>',
+                    진행중: '<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">진행중</span>',
+                    미시작: '<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">미시작</span>',
+                }
+                return badges[status] || badges["미시작"]
+            }
 
-        // Overall status badge helper
-        function getOverallStatusBadge(status) {
-            const badges = {
-                '완료': '<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">완료</span>',
-                '진행중': '<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">진행중</span>',
-                '미시작': '<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">미시작</span>'
-            };
-            return badges[status] || badges['미시작'];
-        }
+            // Render table
+            function renderTable(data) {
+                const tbody = document.getElementById("tableBody")
 
-        // Render table
-        function renderTable(data) {
-            const tbody = document.getElementById('tableBody');
-            
-            if (data.length === 0) {
-                tbody.innerHTML = `
+                if (data.length === 0) {
+                    tbody.innerHTML = `
                     <tr>
                         <td colspan="9" class="px-4 py-8 text-center text-gray-500">
                             검색 결과가 없습니다
                         </td>
                     </tr>
-                `;
-                return;
-            }
+                `
+                    return
+                }
 
-            tbody.innerHTML = data.map(student => `
+                tbody.innerHTML = data
+                    .map(
+                        (student) => `
                 <tr class="hover:bg-gray-50">
-                    <td class="px-4 py-3 text-sm text-gray-900">${student.id}</td>
-                    <td class="px-4 py-3 text-sm text-gray-900">${student.school}</td>
-                    <td class="px-4 py-3 text-sm text-gray-900">${student.grade}</td>
-                    <td class="px-4 py-3 text-sm text-gray-900">${student.class}</td>
-                    <td class="px-4 py-3 text-sm text-gray-900">${student.number}</td>
-                    <td class="px-4 py-3 text-sm font-medium text-gray-900">${student.name}</td>
-                    <td class="px-4 py-3 text-center">${getStatusBadge(student.english)}</td>
-                    <td class="px-4 py-3 text-center">${getStatusBadge(student.math)}</td>
-                    <td class="px-4 py-3 text-center">${getOverallStatusBadge(student.status)}</td>
+                    <td class="px-4 py-3 text-sm text-gray-900">${
+                        student.id
+                    }</td>
+                    <td class="px-4 py-3 text-sm text-gray-900">${
+                        student.school
+                    }</td>
+                    <td class="px-4 py-3 text-sm text-gray-900">${
+                        student.grade
+                    }</td>
+                    <td class="px-4 py-3 text-sm text-gray-900">${
+                        student.class
+                    }</td>
+                    <td class="px-4 py-3 text-sm text-gray-900">${
+                        student.number
+                    }</td>
+                    <td class="px-4 py-3 text-sm font-medium text-gray-900">${
+                        student.name
+                    }</td>
+                    <td class="px-4 py-3 text-center">${getStatusBadge(
+                        student.english
+                    )}</td>
+                    <td class="px-4 py-3 text-center">${getStatusBadge(
+                        student.math
+                    )}</td>
+                    <td class="px-4 py-3 text-center">${getOverallStatusBadge(
+                        student.status
+                    )}</td>
                 </tr>
-            `).join('');
-        }
-
-        // Filter function
-        function filterData() {
-            const schoolFilter = document.getElementById('schoolFilter').value.toLowerCase();
-            const gradeFilter = document.getElementById('gradeFilter').value;
-            const classFilter = document.getElementById('classFilter').value;
-            const searchInput = document.getElementById('searchInput').value.toLowerCase();
-
-            const filtered = studentData.filter(student => {
-                return (!schoolFilter || student.school.toLowerCase().includes(schoolFilter)) &&
-                       (!gradeFilter || student.grade === gradeFilter) &&
-                       (!classFilter || student.class === classFilter) &&
-                       (!searchInput || student.name.toLowerCase().includes(searchInput));
-            });
-
-            renderTable(filtered);
-            updateSummary(filtered);
-            updateTotalCount(filtered);
-        }
-
-        // Update summary with progress bars
-        function updateSummary(data) {
-            const total = data.length;
-            const completed = data.filter(s => s.english === 'completed' && s.math === 'completed').length;
-            const inProgress = data.filter(s => 
-                (s.english === 'completed' || s.math === 'completed') &&
-                !(s.english === 'completed' && s.math === 'completed')
-            ).length;
-            const notStarted = total - completed - inProgress;
-
-            document.getElementById('totalStudents').textContent = total;
-            document.getElementById('completedStudents').textContent = completed;
-            document.getElementById('inProgressStudents').textContent = inProgress;
-            document.getElementById('notStartedStudents').textContent = notStarted;
-
-            // Update progress bars
-            const completedPercent = total > 0 ? (completed / total * 100).toFixed(1) : 0;
-            const inProgressPercent = total > 0 ? (inProgress / total * 100).toFixed(1) : 0;
-            const notStartedPercent = total > 0 ? (notStarted / total * 100).toFixed(1) : 0;
-
-            document.querySelector('.bg-green-500').style.width = `${completedPercent}%`;
-            document.querySelector('.bg-blue-500').style.width = `${inProgressPercent}%`;
-            document.querySelector('.bg-gray-400').style.width = `${notStartedPercent}%`;
-        }
-
-        // Update total count
-        function updateTotalCount(data) {
-            document.getElementById('totalCount').textContent = data.length;
-        }
-
-        // Download Excel (placeholder)
-        function downloadExcel() {
-            alert('엑셀 다운로드 기능은 추후 구현 예정입니다.');
-        }
-
-        // Handle logout
-        function handleLogout() {
-            if (confirm('로그아웃 하시겠습니까?')) {
-                // In real app, handle logout
-                window.location.href = '/admin-login.html';
+            `
+                    )
+                    .join("")
             }
-        }
 
-        // Event listeners
-        document.getElementById('schoolFilter').addEventListener('input', filterData);
-        document.getElementById('gradeFilter').addEventListener('input', filterData);
-        document.getElementById('classFilter').addEventListener('input', filterData);
-        document.getElementById('searchInput').addEventListener('input', filterData);
+            // Filter function
+            function filterData() {
+                const schoolFilter = document
+                    .getElementById("schoolFilter")
+                    .value.toLowerCase()
+                const gradeFilter = document.getElementById("gradeFilter").value
+                const classFilter = document.getElementById("classFilter").value
+                const searchInput = document
+                    .getElementById("searchInput")
+                    .value.toLowerCase()
 
-        // Initial render
-        renderTable(studentData);
-        updateSummary(studentData);
-        updateTotalCount(studentData);
-    </script>
-</body>
+                const filtered = studentData.filter((student) => {
+                    return (
+                        (!schoolFilter ||
+                            student.school
+                                .toLowerCase()
+                                .includes(schoolFilter)) &&
+                        (!gradeFilter || student.grade === gradeFilter) &&
+                        (!classFilter || student.class === classFilter) &&
+                        (!searchInput ||
+                            student.name.toLowerCase().includes(searchInput))
+                    )
+                })
+
+                renderTable(filtered)
+                updateSummary(filtered)
+                updateTotalCount(filtered)
+            }
+
+            // Update summary with progress bars
+            function updateSummary(data) {
+                const total = data.length
+                const completed = data.filter(
+                    (s) => s.english === "completed" && s.math === "completed"
+                ).length
+                const inProgress = data.filter(
+                    (s) =>
+                        (s.english === "completed" || s.math === "completed") &&
+                        !(s.english === "completed" && s.math === "completed")
+                ).length
+                const notStarted = total - completed - inProgress
+
+                document.getElementById("totalStudents").textContent = total
+                document.getElementById("completedStudents").textContent =
+                    completed
+                document.getElementById("inProgressStudents").textContent =
+                    inProgress
+                document.getElementById("notStartedStudents").textContent =
+                    notStarted
+
+                // Update progress bars
+                const completedPercent =
+                    total > 0 ? ((completed / total) * 100).toFixed(1) : 0
+                const inProgressPercent =
+                    total > 0 ? ((inProgress / total) * 100).toFixed(1) : 0
+                const notStartedPercent =
+                    total > 0 ? ((notStarted / total) * 100).toFixed(1) : 0
+
+                document.querySelector(
+                    ".bg-green-500"
+                ).style.width = `${completedPercent}%`
+                document.querySelector(
+                    ".bg-blue-500"
+                ).style.width = `${inProgressPercent}%`
+                document.querySelector(
+                    ".bg-gray-400"
+                ).style.width = `${notStartedPercent}%`
+            }
+
+            // Update total count
+            function updateTotalCount(data) {
+                document.getElementById("totalCount").textContent = data.length
+            }
+
+            // Download Excel (placeholder)
+            function downloadExcel() {
+                alert("엑셀 다운로드 기능은 추후 구현 예정입니다.")
+            }
+
+            // Handle logout
+            function handleLogout() {
+                if (confirm("로그아웃 하시겠습니까?")) {
+                    // In real app, handle logout
+                    window.location.href = "/admin-login.html"
+                }
+            }
+
+            // Event listeners
+            document
+                .getElementById("schoolFilter")
+                .addEventListener("input", filterData)
+            document
+                .getElementById("gradeFilter")
+                .addEventListener("input", filterData)
+            document
+                .getElementById("classFilter")
+                .addEventListener("input", filterData)
+            document
+                .getElementById("searchInput")
+                .addEventListener("input", filterData)
+
+            // Initial render
+            renderTable(studentData)
+            updateSummary(studentData)
+            updateTotalCount(studentData)
+        </script>
+    </body>
 </html>
