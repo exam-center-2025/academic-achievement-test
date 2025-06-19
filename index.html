@@ -463,41 +463,137 @@
             </div>
         </div>
 
-        <!-- Slide 2: Service Flow Overview -->
+        <!-- Slide 2: Table of Contents -->
+        <div class="slide">
+            <div class="slide-content">
+                <h2>목차</h2>
+                <div style="max-width: 1100px; margin: 0 auto; margin-top: 50px;">
+                    <div style="font-size: 18px; line-height: 2.5; color: #333;">
+                        <div style="display: flex; align-items: center; padding: 12px 20px; border-bottom: 1px dotted #ccc; transition: background-color 0.2s ease; cursor: pointer;" 
+                             onmouseover="this.style.backgroundColor='#f8f9fa'" 
+                             onmouseout="this.style.backgroundColor='transparent'"
+                             onclick="currentSlide = 2; updateSlide();">
+                            <span style="font-weight: 500;">1. 학업성취도 검사 진행 흐름</span>
+                            <span style="flex: 1; border-bottom: 1px dotted #ddd; margin: 0 15px;"></span>
+                            <span style="color: #666; font-weight: 500;">3</span>
+                        </div>
+                        <div style="display: flex; align-items: center; padding: 12px 20px; border-bottom: 1px dotted #ccc; transition: background-color 0.2s ease; cursor: pointer;" 
+                             onmouseover="this.style.backgroundColor='#f8f9fa'" 
+                             onmouseout="this.style.backgroundColor='transparent'"
+                             onclick="currentSlide = 3; updateSlide();">
+                            <span style="font-weight: 500;">2. 학생 > 로그인</span>
+                            <span style="flex: 1; border-bottom: 1px dotted #ddd; margin: 0 15px;"></span>
+                            <span style="color: #666; font-weight: 500;">4</span>
+                        </div>
+                        <div style="display: flex; align-items: center; padding: 12px 20px; border-bottom: 1px dotted #ccc; transition: background-color 0.2s ease; cursor: pointer;" 
+                             onmouseover="this.style.backgroundColor='#f8f9fa'" 
+                             onmouseout="this.style.backgroundColor='transparent'"
+                             onclick="currentSlide = 4; updateSlide();">
+                            <span style="font-weight: 500;">3. 학생 > 정보확인 (최초 1회)</span>
+                            <span style="flex: 1; border-bottom: 1px dotted #ddd; margin: 0 15px;"></span>
+                            <span style="color: #666; font-weight: 500;">5</span>
+                        </div>
+                        <div style="display: flex; align-items: center; padding: 12px 20px; border-bottom: 1px dotted #ccc; transition: background-color 0.2s ease; cursor: pointer;" 
+                             onmouseover="this.style.backgroundColor='#f8f9fa'" 
+                             onmouseout="this.style.backgroundColor='transparent'"
+                             onclick="currentSlide = 5; updateSlide();">
+                            <span style="font-weight: 500;">4. 학생 > 시험목록</span>
+                            <span style="flex: 1; border-bottom: 1px dotted #ddd; margin: 0 15px;"></span>
+                            <span style="color: #666; font-weight: 500;">6</span>
+                        </div>
+                        <div style="display: flex; align-items: center; padding: 12px 20px; border-bottom: 1px dotted #ccc; transition: background-color 0.2s ease; cursor: pointer;" 
+                             onmouseover="this.style.backgroundColor='#f8f9fa'" 
+                             onmouseout="this.style.backgroundColor='transparent'"
+                             onclick="currentSlide = 6; updateSlide();">
+                            <span style="font-weight: 500;">5. 학생 > 응시</span>
+                            <span style="flex: 1; border-bottom: 1px dotted #ddd; margin: 0 15px;"></span>
+                            <span style="color: #666; font-weight: 500;">7</span>
+                        </div>
+                        <div style="display: flex; align-items: center; padding: 12px 20px; border-bottom: 1px dotted #ccc; transition: background-color 0.2s ease; cursor: pointer;" 
+                             onmouseover="this.style.backgroundColor='#f8f9fa'" 
+                             onmouseout="this.style.backgroundColor='transparent'"
+                             onclick="currentSlide = 7; updateSlide();">
+                            <span style="font-weight: 500;">6. 리서치, 학교 담당자 > 로그인</span>
+                            <span style="flex: 1; border-bottom: 1px dotted #ddd; margin: 0 15px;"></span>
+                            <span style="color: #666; font-weight: 500;">8</span>
+                        </div>
+                        <div style="display: flex; align-items: center; padding: 12px 20px; border-bottom: 1px dotted #ccc; transition: background-color 0.2s ease; cursor: pointer;" 
+                             onmouseover="this.style.backgroundColor='#f8f9fa'" 
+                             onmouseout="this.style.backgroundColor='transparent'"
+                             onclick="currentSlide = 8; updateSlide();">
+                            <span style="font-weight: 500;">7. 리서치, 학교 담당자 > 집계</span>
+                            <span style="flex: 1; border-bottom: 1px dotted #ddd; margin: 0 15px;"></span>
+                            <span style="color: #666; font-weight: 500;">9</span>
+                        </div>
+                        <div style="display: flex; align-items: center; padding: 12px 20px; border-bottom: 1px dotted #ccc; transition: background-color 0.2s ease; cursor: pointer;" 
+                             onmouseover="this.style.backgroundColor='#f8f9fa'" 
+                             onmouseout="this.style.backgroundColor='transparent'"
+                             onclick="currentSlide = 9; updateSlide();">
+                            <span style="font-weight: 500;">8. 개발 일정</span>
+                            <span style="flex: 1; border-bottom: 1px dotted #ddd; margin: 0 15px;"></span>
+                            <span style="color: #666; font-weight: 500;">10</span>
+                        </div>
+                        <div style="display: flex; align-items: center; padding: 12px 20px; transition: background-color 0.2s ease; cursor: pointer;" 
+                             onmouseover="this.style.backgroundColor='#f8f9fa'" 
+                             onmouseout="this.style.backgroundColor='transparent'"
+                             onclick="currentSlide = 10; updateSlide();">
+                            <span style="font-weight: 500;">9. 마무리</span>
+                            <span style="flex: 1; border-bottom: 1px dotted #ddd; margin: 0 15px;"></span>
+                            <span style="color: #666; font-weight: 500;">11</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3: Service Flow Overview -->
         <div class="slide">
             <div class="slide-content">
                 <h2>1. 학업성취도 검사 진행 흐름</h2>
-                <div style="margin-top: 40px;">
-                    <h4 style="text-align: center; color: #4263eb; margin-bottom: 24px;">학생</h4>
-                    <div class="flow-diagram">
-                        <div class="flow-box">로그인</div>
-                        <div class="flow-arrow">→</div>
-                        <div class="flow-box">정보확인<br><small style="font-size: 12px; color: #868e96;">(최초1회)</small></div>
-                        <div class="flow-arrow">→</div>
-                        <div class="flow-box">시험목록</div>
-                        <div class="flow-arrow">→</div>
-                        <div class="flow-box">시험선택</div>
-                        <div class="flow-arrow">→</div>
-                        <div class="flow-box">시험</div>
-                        <div class="flow-arrow">→</div>
-                        <div class="flow-box">제출</div>
-                    </div>
-                </div>
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 48px;">
-                    <div>
-                        <h4 style="text-align: center; color: #4263eb; margin-bottom: 24px;">리서치</h4>
+                
+                <!-- Student Process Flow -->
+                <div class="flow-section" style="margin-top: 40px;">
+                    <h3 class="flow-section-title" style="font-size: 18px; color: #495057; margin-bottom: 20px; font-weight: 600; padding-left: 10px; border-left: 4px solid #9775fa;">학생 시험 응시 프로세스</h3>
+                    <div class="main-flow-container" style="background: #f3f0ff; border: 2px solid #e5dbff; border-radius: 12px; padding: 25px;">
                         <div class="flow-diagram">
-                            <div class="flow-box">로그인</div>
-                            <div class="flow-arrow">→</div>
-                            <div class="flow-box">집계표</div>
+                            <div class="flow-box" style="background: #f3f0ff; border-color: #e5dbff;">학생로그인</div>
+                            <div class="flow-arrow" style="color: #9775fa;">→</div>
+                            <div class="flow-box" style="background: #e5dbff; border-color: #9775fa; color: #6741d9;">정보확인<br><small style="font-size: 12px;">(최초1회)</small></div>
+                            <div class="flow-arrow" style="color: #9775fa;">→</div>
+                            <div class="flow-box" style="background: #f3f0ff; border-color: #e5dbff;">시험목록</div>
+                            <div class="flow-arrow" style="color: #9775fa;">→</div>
+                            <div class="flow-box" style="background: #f3f0ff; border-color: #e5dbff;">시험선택</div>
+                            <div class="flow-arrow" style="color: #9775fa;">→</div>
+                            <div class="flow-box" style="background: #f3f0ff; border-color: #e5dbff;">시험</div>
+                            <div class="flow-arrow" style="color: #9775fa;">→</div>
+                            <div class="flow-box" style="background: #f3f0ff; border-color: #e5dbff;">제출</div>
                         </div>
                     </div>
-                    <div>
-                        <h4 style="text-align: center; color: #4263eb; margin-bottom: 24px;">학교관리자</h4>
-                        <div class="flow-diagram">
-                            <div class="flow-box">로그인</div>
-                            <div class="flow-arrow">→</div>
-                            <div class="flow-box">집계표</div>
+                </div>
+
+                <!-- Teacher and Admin Process Flow -->
+                <div style="margin-top: 40px;">
+                    <!-- Teacher Process -->
+                    <div class="flow-section" style="margin-bottom: 30px;">
+                        <h3 class="flow-section-title" style="font-size: 18px; color: #495057; margin-bottom: 20px; font-weight: 600; padding-left: 10px; border-left: 4px solid #339af0;">리서치 프로세스</h3>
+                        <div style="background: #e7f5ff; border: 2px solid #a5d8ff; border-radius: 12px; padding: 25px;">
+                            <div class="flow-diagram">
+                                <div class="flow-box" style="background: #e7f5ff; border-color: #a5d8ff;">리서치 로그인</div>
+                                <div class="flow-arrow" style="color: #339af0;">→</div>
+                                <div class="flow-box" style="background: #e7f5ff; border-color: #a5d8ff;">집계표</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Admin Process -->
+                    <div class="flow-section">
+                        <h3 class="flow-section-title" style="font-size: 18px; color: #495057; margin-bottom: 20px; font-weight: 600; padding-left: 10px; border-left: 4px solid #51cf66;">학교관리자 프로세스</h3>
+                        <div style="background: #f3fae8; border: 2px solid #d3f9d8; border-radius: 12px; padding: 25px;">
+                            <div class="flow-diagram">
+                                <div class="flow-box" style="background: #f3fae8; border-color: #d3f9d8;">학교관리자 로그인</div>
+                                <div class="flow-arrow" style="color: #51cf66;">→</div>
+                                <div class="flow-box" style="background: #f3fae8; border-color: #d3f9d8;">집계표</div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -545,7 +641,7 @@
                     <div style="font-size: 80px; margin-bottom: 24px;">📝</div>
                     <h3>응시 화면</h3>
                     <p style="font-size: 18px; color: #6c757d; margin-top: 20px;">
-                        실제 시험 응시 화면은 별도로 구현 예정입니다.
+                        실제 시험 응시 화면을 참조하세요.
                     </p>
 
                 </div>
@@ -574,7 +670,184 @@
             </div>
         </div>
 
-        <!-- Slide 9: Summary -->
+        <!-- Slide 10: Development Schedule -->
+        <div class="slide">
+            <div class="slide-content">
+                <h2>8. 개발 일정 - 한국리서치 CBT</h2>
+                <div style="overflow-y: auto; height: calc(100vh - 200px); padding-right: 20px;">
+                    <!-- Infrastructure -->
+                    <div style="margin-bottom: 30px;">
+                        <h3 style="font-size: 20px; color: #1a1a2e; margin-bottom: 16px; display: flex; align-items: center;">
+                            <span style="background: #4263eb; color: white; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 12px; font-size: 16px;">1</span>
+                            인프라구축 <span style="background: #e3f2fd; color: #1976d2; padding: 4px 12px; border-radius: 4px; font-size: 14px; margin-left: 12px;">1d</span>
+                        </h3>
+                        <div style="background: #f8f9fa; border-radius: 8px; padding: 20px; margin-left: 44px;">
+                            <div style="display: grid; gap: 12px;">
+                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                    <span><span style="color: #6c757d; margin-right: 8px;">1.1</span> 클라우드 서버 생성</span>
+                                    <span style="background: #e8f5e9; color: #2e7d32; padding: 2px 8px; border-radius: 4px; font-size: 13px;">이동명 수석</span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                    <span><span style="color: #6c757d; margin-right: 8px;">1.2</span> 클라우드 웹서비스 설치</span>
+                                    <span style="background: #e8f5e9; color: #2e7d32; padding: 2px 8px; border-radius: 4px; font-size: 13px;">이동명 수석</span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                    <span><span style="color: #6c757d; margin-right: 8px;">1.3</span> 클라우드 WAS서비스 설치</span>
+                                    <span style="background: #e8f5e9; color: #2e7d32; padding: 2px 8px; border-radius: 4px; font-size: 13px;">이동명 수석</span>
+                                </div>
+                                <div style="display: flex; align-items: center; color: #dc3545;">
+                                    <span style="color: #6c757d; margin-right: 8px;">1.4</span> 로드밸런싱 제외
+                                </div>
+                                <div style="display: flex; justify-content: space-between; align-items: start;">
+                                    <div style="display: flex; align-items: start;">
+                                        <span style="color: #6c757d; margin-right: 8px;">1.5</span>
+                                        <div>
+                                            데이타베이스 구축(기존 시험센터 복제)
+                                            <div style="margin-left: 20px; margin-top: 8px; color: #6c757d;">
+                                                <div>• 개발서버</div>
+                                                <div>• 운영서버</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <span style="background: #fff3cd; color: #856404; padding: 2px 8px; border-radius: 4px; font-size: 13px;">정혜현 부장</span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; align-items: start;">
+                                    <div style="display: flex; align-items: start;">
+                                        <span style="color: #6c757d; margin-right: 8px;">1.6</span>
+                                        <div>
+                                            프로젝트 구축(기존 시험센터 프로젝트 복제)
+                                            <div style="margin-left: 20px; margin-top: 8px; color: #6c757d;">
+                                                <div>• SVN저장소 등록</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <span style="background: #e3f2fd; color: #1565c0; padding: 2px 8px; border-radius: 4px; font-size: 13px;">최성용 차장</span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; align-items: start;">
+                                    <div style="display: flex; align-items: start;">
+                                        <span style="color: #6c757d; margin-right: 8px;">1.7</span>
+                                        <div>
+                                            빌드설정
+                                            <div style="margin-left: 20px; margin-top: 8px; color: #6c757d;">
+                                                <div>• 개발서버 젠킨스 등록</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <span style="background: #e3f2fd; color: #1565c0; padding: 2px 8px; border-radius: 4px; font-size: 13px;">최성용 차장</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Service Development -->
+                    <div style="margin-bottom: 30px;">
+                        <h3 style="font-size: 20px; color: #1a1a2e; margin-bottom: 16px; display: flex; align-items: center;">
+                            <span style="background: #4263eb; color: white; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 12px; font-size: 16px;">2</span>
+                            서비스개발
+                        </h3>
+                        
+                        <!-- Frontend Development -->
+                        <div style="margin-left: 44px; margin-bottom: 20px;">
+                            <h4 style="font-size: 16px; color: #495057; margin-bottom: 12px; display: flex; align-items: center;">
+                                2.1 프론트 개발 
+                                <span style="background: #e3f2fd; color: #1976d2; padding: 4px 12px; border-radius: 4px; font-size: 14px; margin-left: 12px;">1d</span>
+                                <span style="background: #e8f5e9; color: #2e7d32; padding: 2px 8px; border-radius: 4px; font-size: 13px; margin-left: 12px;">이동명 수석</span>
+                            </h4>
+                            <div style="background: #f8f9fa; border-radius: 8px; padding: 20px;">
+                                <div style="display: grid; gap: 10px;">
+                                    <div><span style="color: #6c757d;">2.1.1</span> 수험자 로그인 페이지 개발<span style="color: #28a745; margin-left: 8px;">(신규)</span></div>
+                                    <div><span style="color: #6c757d;">2.1.2</span> 리서치,학교 관리자 로그인 페이지 개발<span style="color: #28a745; margin-left: 8px;">(신규)</span></div>
+                                    <div><span style="color: #6c757d;">2.1.3</span> 정보확인 페이지 개발<span style="color: #28a745; margin-left: 8px;">(신규)</span></div>
+                                    <div><span style="color: #6c757d;">2.1.4</span> 시험목록 페이지 개발<span style="color: #ffc107; margin-left: 8px;">(수정)</span></div>
+                                    <div><span style="color: #6c757d;">2.1.5</span> 집계 페이지 개발<span style="color: #28a745; margin-left: 8px;">(신규)</span></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Backend Development -->
+                        <div style="margin-left: 44px;">
+                            <h4 style="font-size: 16px; color: #495057; margin-bottom: 12px;">
+                                2.2 백엔드 개발 <span style="background: #e3f2fd; color: #1976d2; padding: 4px 12px; border-radius: 4px; font-size: 14px; margin-left: 12px;">1d</span>
+                            </h4>
+                            <div style="background: #f8f9fa; border-radius: 8px; padding: 20px;">
+                                <div style="margin-bottom: 16px;">
+                                    <div style="font-weight: 500; margin-bottom: 8px;"><span style="color: #6c757d;">2.2.1</span> 로그인 서비스</div>
+                                    <div style="margin-left: 40px;">
+                                        <div style="margin-bottom: 12px;">
+                                            <div style="font-weight: 500; color: #495057; display: flex; justify-content: space-between; align-items: center;">
+                                                <span>학생 로그인</span>
+                                                <span style="background: #f3e5f5; color: #6a1b9a; padding: 2px 8px; border-radius: 4px; font-size: 13px;">권대현 과장</span>
+                                            </div>
+                                            <div style="margin-left: 20px; margin-top: 6px; color: #6c757d; font-size: 14px;">
+                                                <div>• 학교,학년,반,번호,이름 기반 로그인 서비스 개발</div>
+                                                <div>• 접수등록</div>
+                                                <div>• 시행정보등록</div>
+                                                <div>• 사용자정보파일생성</div>
+                                                <div>• 로그인처리</div>
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div style="font-weight: 500; color: #495057; display: flex; justify-content: space-between; align-items: center;">
+                                                <span>리서치,학교 관리자 로그인</span>
+                                                <span style="background: #f3e5f5; color: #6a1b9a; padding: 2px 8px; border-radius: 4px; font-size: 13px;">권대현 과장</span>
+                                            </div>
+                                            <div style="margin-left: 20px; margin-top: 6px; color: #6c757d; font-size: 14px;">
+                                                <div>• 로그인처리</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                    <span><span style="color: #6c757d;">2.2.2</span> 집계 서비스 개발<span style="color: #28a745; margin-left: 8px;">(신규)</span></span>
+                                    <span style="background: #e8f5e9; color: #2e7d32; padding: 2px 8px; border-radius: 4px; font-size: 13px;">이동명 수석</span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 10px;">
+                                    <span><span style="color: #6c757d;">2.2.3</span> 학생 시험목록 개발<span style="color: #ffc107; margin-left: 8px;">(수정)</span></span>
+                                    <span style="background: #e8f5e9; color: #2e7d32; padding: 2px 8px; border-radius: 4px; font-size: 13px;">이동명 수석</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Others -->
+                    <div>
+                        <h3 style="font-size: 20px; color: #1a1a2e; margin-bottom: 16px; display: flex; align-items: center;">
+                            <span style="background: #4263eb; color: white; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-right: 12px; font-size: 16px;">3</span>
+                            기타 <span style="background: #e3f2fd; color: #1976d2; padding: 4px 12px; border-radius: 4px; font-size: 14px; margin-left: 12px;">1d</span>
+                        </h3>
+                        <div style="background: #f8f9fa; border-radius: 8px; padding: 20px; margin-left: 44px;">
+                            <div style="display: grid; gap: 12px;">
+                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                    <span><span style="color: #6c757d;">3.1</span> 분석 및 설계</span>
+                                    <span style="background: #e8f5e9; color: #2e7d32; padding: 2px 8px; border-radius: 4px; font-size: 13px;">이동명 수석</span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                    <span><span style="color: #6c757d;">3.2</span> 문항 이관</span>
+                                    <span style="background: #e1f5fe; color: #0277bd; padding: 2px 8px; border-radius: 4px; font-size: 13px;">이동명 수석, 정혜현 부장</span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                    <span><span style="color: #6c757d;">3.3</span> 문항입력</span>
+                                    <span style="background: #e3f2fd; color: #1565c0; padding: 2px 8px; border-radius: 4px; font-size: 13px;">이은숙 차장</span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                    <span><span style="color: #6c757d;">3.4</span> 서비스 확인</span>
+                                    <span style="background: #fce4ec; color: #c2185b; padding: 2px 8px; border-radius: 4px; font-size: 13px;">품질관리</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Total Duration -->
+                    <div style="margin-top: 40px; text-align: center;">
+                        <div style="display: inline-block; background: #1a1a2e; color: white; padding: 16px 32px; border-radius: 8px; font-size: 18px; font-weight: 600;">
+                            총 소요 기간: 4일
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 11: Summary -->
         <div class="slide">
             <div class="slide-content title-slide">
                 <h1 style="font-size: 48px; margin-bottom: 60px;">감사합니다</h1>
@@ -588,7 +861,7 @@
     <!-- Navigation Controls -->
     <div class="nav-controls">
         <button class="nav-btn" id="prevBtn" onclick="changeSlide(-1)">이전</button>
-        <span class="slide-indicator" id="slideIndicator">1 / 9</span>
+        <span class="slide-indicator" id="slideIndicator">1 / 11</span>
         <button class="nav-btn" id="nextBtn" onclick="changeSlide(1)">다음</button>
     </div>
 
