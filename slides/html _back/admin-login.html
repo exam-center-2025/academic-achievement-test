@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>학업성취도 검사 - 로그인</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', 'Noto Sans KR', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: transparent;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+            font-size: 14px;
+            color: #212529;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .main-container {
+            background: #ffffff;
+            width: 100%;
+            max-width: 440px;
+            border-radius: 12px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e9ecef;
+            overflow: hidden;
+        }
+
+        /* Login Form Section */
+        .login-section {
+            padding: 50px 40px;
+            display: flex;
+            flex-direction: column;
+            background: #ffffff;
+        }
+
+        .exam-title {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 30px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .exam-main {
+            font-size: 15px;
+            color: #666666;
+            margin-bottom: 10px;
+            font-weight: 400;
+            letter-spacing: -0.2px;
+        }
+
+        .exam-sub {
+            font-size: 26px;
+            color: #333333;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        .form-container {
+            flex: 1;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            color: #333333;
+            font-size: 15px;
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+
+        .form-group label::after {
+            content: ' *';
+            color: #ff6b6b;
+            font-size: 13px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 14px 16px;
+            border: 2px solid #e0e0e0;
+            background: #ffffff;
+            color: #333333;
+            font-size: 16px;
+            border-radius: 8px;
+            outline: none;
+            transition: all 0.2s ease;
+        }
+
+        .form-group input::placeholder {
+            color: #999999;
+            font-size: 15px;
+        }
+
+        .form-group input:hover {
+            background: #fafafa;
+            border-color: #d0d0d0;
+        }
+
+        .form-group input:focus {
+            background: #ffffff;
+            border-color: #000;
+            box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Password visibility toggle */
+        .password-input-wrapper {
+            position: relative;
+        }
+
+        .toggle-password {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 4px;
+            color: #666666;
+            transition: color 0.2s ease;
+        }
+
+        .toggle-password:hover {
+            color: #000;
+        }
+
+        .toggle-password svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        .login-button {
+            width: 100%;
+            background: #000;
+            color: white;
+            padding: 16px;
+            border: none;
+            font-size: 17px;
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: all 0.2s ease;
+            letter-spacing: -0.2px;
+            margin-top: 30px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .login-button:hover {
+            background: #333;
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .login-button:active {
+            transform: translateY(0);
+        }
+
+        .copyright {
+            text-align: center;
+            color: #999999;
+            font-size: 12px;
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 1px solid #f0f0f0;
+        }
+
+        /* Error states */
+        .form-group.error input {
+            border-color: #ff6b6b;
+            background-color: rgba(255, 107, 107, 0.1);
+        }
+
+        .form-group .error-message {
+            color: #ff6b6b;
+            font-size: 13px;
+            margin-top: 4px;
+            display: none;
+        }
+
+        .form-group.error .error-message {
+            display: block;
+        }
+
+        /* Loading state */
+        .login-button.loading {
+            background: #6c757d;
+            cursor: not-allowed;
+            position: relative;
+        }
+
+        .login-button.loading::after {
+            content: '';
+            position: absolute;
+            width: 16px;
+            height: 16px;
+            top: 50%;
+            left: 50%;
+            margin-left: -8px;
+            margin-top: -8px;
+            border: 2px solid #ffffff;
+            border-radius: 50%;
+            border-top-color: transparent;
+            animation: spinner 0.8s linear infinite;
+        }
+
+        @keyframes spinner {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Responsive */
+        @media (max-width: 480px) {
+            .login-section {
+                padding: 40px 25px;
+            }
+            
+            .exam-sub {
+                font-size: 22px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="main-container">
+        <!-- Login Form Section -->
+        <div class="login-section">
+            <div class="exam-title">
+                <div class="exam-main">디지털교육 성과 진단 및 효과 분석 연구</div>
+                <div class="exam-sub">학업성취도 검사</div>
+            </div>
+            
+            <!-- Login Form -->
+            <form id="loginForm" class="form-container">
+                <div class="form-group">
+                    <label for="userId">아이디</label>
+                    <input type="text" id="userId" name="userId" placeholder="아이디를 입력하세요" required>
+                    <span class="error-message"></span>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">비밀번호</label>
+                    <div class="password-input-wrapper">
+                        <input type="password" id="password" name="password" placeholder="비밀번호를 입력하세요" required>
+                        <button type="button" class="toggle-password" onclick="togglePassword()">
+                            <svg class="eye-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                <circle cx="12" cy="12" r="3"></circle>
+                            </svg>
+                            <svg class="eye-closed" style="display: none;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path>
+                                <line x1="1" y1="1" x2="23" y2="23"></line>
+                            </svg>
+                        </button>
+                    </div>
+                    <span class="error-message"></span>
+                </div>
+                
+                <button type="submit" class="login-button">로그인</button>
+            </form>
+            
+            <div class="copyright">
+                Copyright © IOSYS Corp. All Rights Reserved.
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Password visibility toggle
+        function togglePassword() {
+            const input = document.getElementById('password');
+            const button = input.nextElementSibling;
+            const eyeOpen = button.querySelector('.eye-open');
+            const eyeClosed = button.querySelector('.eye-closed');
+            
+            if (input.type === 'password') {
+                input.type = 'text';
+                eyeOpen.style.display = 'none';
+                eyeClosed.style.display = 'block';
+            } else {
+                input.type = 'password';
+                eyeOpen.style.display = 'block';
+                eyeClosed.style.display = 'none';
+            }
+        }
+
+        // Form validation
+        function validateForm() {
+            const form = document.getElementById('loginForm');
+            const inputs = form.querySelectorAll('input[required]');
+            let isValid = true;
+            
+            inputs.forEach(input => {
+                const formGroup = input.closest('.form-group');
+                const errorMsg = formGroup.querySelector('.error-message');
+                
+                formGroup.classList.remove('error');
+                
+                if (!input.value.trim()) {
+                    formGroup.classList.add('error');
+                    errorMsg.textContent = '필수 입력 항목입니다.';
+                    isValid = false;
+                }
+            });
+            
+            return isValid;
+        }
+
+        // Form submission
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            if (!validateForm()) {
+                return;
+            }
+            
+            const button = this.querySelector('.login-button');
+            
+            // Show loading
+            button.classList.add('loading');
+            button.textContent = '';
+            
+            // Simulate login
+            setTimeout(() => {
+                const formData = {
+                    userId: document.getElementById('userId').value,
+                    password: document.getElementById('password').value
+                };
+                
+                console.log('로그인 데이터:', formData);
+                alert('로그인 처리 중...');
+                
+                button.classList.remove('loading');
+                button.textContent = '로그인';
+            }, 1500);
+        });
+
+        // Clear error messages on input
+        document.querySelectorAll('input').forEach(input => {
+            input.addEventListener('input', function() {
+                const formGroup = this.closest('.form-group');
+                formGroup.classList.remove('error');
+            });
+        });
+
+        // Handle Enter key for better UX
+        document.getElementById('userId').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                document.getElementById('password').focus();
+            }
+        });
+    </script>
+</body>
+</html>

@@ -3,527 +3,233 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>학업성취도 검사 - 시험목록</title>
+    <title>학업성취도 검사 - 시험 목록</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Inter', 'Noto Sans KR', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: #ffffff;
-            min-height: 100vh;
-            padding: 0;
-            font-size: 14px;
-            color: #212529;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-        }
-
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        /* Header - 미니멀하고 깔끔한 디자인 */
-        .header {
-            padding: 40px 0;
-            text-align: center;
-            border-bottom: 1px solid #f0f0f0;
-            margin-bottom: 40px;
-        }
-
-        .header-title {
-            font-size: 20px;
-            color: #000;
-            font-weight: 600;
-            letter-spacing: -0.3px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-        }
-
-        .header-main {
-            font-size: 14px;
-            color: #666;
-            font-weight: 500;
-        }
-
-        .header-divider {
-            color: #ddd;
-        }
-
-        .header-sub {
-            font-size: 20px;
-            color: #000;
-            font-weight: 600;
-        }
-
-        /* User Info - 플로팅 없는 심플한 정보 표시 */
-        .user-info {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding-bottom: 20px;
-            margin-bottom: 40px;
-            border-bottom: 1px solid #f0f0f0;
-        }
-
-        .user-detail {
-            display: flex;
-            align-items: center;
-            gap: 24px;
-            flex-wrap: wrap;
-        }
-
-        .user-item {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .user-label {
-            font-size: 14px;
-            color: #888;
-            font-weight: 400;
-        }
-
-        .user-value {
-            font-size: 16px;
-            color: #000;
-            font-weight: 600;
-        }
-
-        /* Exam Cards - 플랫하고 미니멀한 카드 디자인 */
-        .exam-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 24px;
-            margin-bottom: 60px;
-        }
-
-        .exam-card {
-            background: #ffffff;
-            border: 1px solid #e8e8e8;
-            border-radius: 8px;
-            padding: 32px;
-            transition: all 0.2s ease;
-            position: relative;
-        }
-
-        .exam-card:hover {
-            border-color: #d0d0d0;
-            transform: translateY(-2px);
-        }
-
-        /* 상태별 액센트 라인 */
-        .exam-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            border-radius: 8px 8px 0 0;
-        }
-
-        .exam-card.available::before {
-            background: #000000;
-        }
-
-        .exam-card.completed::before {
-            background: #4caf50;
-        }
-
-        .exam-header {
-            margin-bottom: 24px;
-        }
-
-        .exam-title {
-            font-size: 20px;
-            color: #000;
-            font-weight: 600;
-            margin-bottom: 4px;
-        }
-
-        .exam-subtitle {
-            font-size: 13px;
-            color: #888;
-            font-weight: 400;
-        }
-
-        /* 시험 정보 - 테이블 형식의 깔끔한 표시 */
-        .exam-info {
-            margin-bottom: 28px;
-        }
-
-        .info-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px 0;
-            border-bottom: 1px solid #f5f5f5;
-        }
-
-        .info-row:last-child {
-            border-bottom: none;
-        }
-
-        .info-label {
-            font-size: 13px;
-            color: #666;
-            font-weight: 400;
-        }
-
-        .info-value {
-            font-size: 13px;
-            color: #000;
-            font-weight: 500;
-        }
-
-        .info-value.status-ready {
-            color: #000;
-        }
-
-        .info-value.status-completed {
-            color: #4caf50;
-        }
-
-        /* Progress Bar - 심플한 프로그레스 바 */
-        .progress-container {
-            margin-bottom: 24px;
-        }
-
-        .progress-label {
-            font-size: 12px;
-            color: #888;
-            margin-bottom: 8px;
-            display: flex;
-            justify-content: space-between;
-        }
-
-        .progress-bar {
-            width: 100%;
-            height: 4px;
-            background: #f0f0f0;
-            border-radius: 2px;
-            overflow: hidden;
-        }
-
-        .progress-fill {
-            height: 100%;
-            background: #000;
-            border-radius: 2px;
-            transition: width 0.3s ease;
-        }
-
-        .progress-fill.completed {
-            background: #4caf50;
-        }
-
-        /* Exam Button - 플랫하고 심플한 버튼 */
-        .exam-button {
-            width: 100%;
-            padding: 14px 24px;
-            border: 1px solid #000;
-            border-radius: 6px;
-            font-size: 14px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            background: #000;
-            color: #fff;
-            letter-spacing: 0.2px;
-        }
-
-        .exam-button:hover:not(:disabled) {
-            background: #333;
-            border-color: #333;
-        }
-
-        .exam-button:active:not(:disabled) {
-            transform: scale(0.98);
-        }
-
-        .exam-button:disabled {
-            background: #f5f5f5;
-            color: #999;
-            border-color: #e8e8e8;
-            cursor: not-allowed;
-        }
-
-        .exam-button.completed {
-            background: #4caf50;
-            border-color: #4caf50;
-            color: #fff;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .container {
-                padding: 0 16px;
-            }
-
-            .header {
-                padding: 32px 0;
-                margin-bottom: 32px;
-            }
-
-            .header-title {
-                font-size: 16px;
-                flex-wrap: wrap;
-            }
-
-            .header-main {
-                font-size: 12px;
-            }
-
-            .header-sub {
-                font-size: 16px;
-            }
-
-            .header-divider {
-                display: none;
-            }
-
-            .user-info {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 16px;
-            }
-
-            .user-detail {
-                gap: 16px;
-            }
-
-            .exam-grid {
-                grid-template-columns: 1fr;
-                gap: 20px;
-            }
-
-            .exam-card {
-                padding: 24px;
-            }
-
-            .exam-title {
-                font-size: 18px;
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'sans': ['Inter', 'Noto Sans KR', 'system-ui', '-apple-system', 'sans-serif'],
+                    }
+                }
             }
         }
-
-        /* Animations - 부드러운 등장 애니메이션 */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .exam-card {
-            animation: fadeInUp 0.5s ease-out forwards;
-            opacity: 0;
-        }
-
-        .exam-card:nth-child(1) {
-            animation-delay: 0.1s;
-        }
-
-        .exam-card:nth-child(2) {
-            animation-delay: 0.2s;
-        }
-
-        .user-info {
-            animation: fadeInUp 0.4s ease-out;
-        }
-
-        .header {
-            animation: fadeInUp 0.3s ease-out;
-        }
-
-
-    </style>
+    </script>
 </head>
-<body>
-    <div class="container">
-        <!-- Header -->
-        <header class="header">
-            <div class="header-title">
-                <span class="header-main">디지털교육 성과 진단 및 효과 분석 연구</span>
-                <span class="header-divider">|</span>
-                <span class="header-sub">학업성취도 검사</span>
+<body class="bg-gray-50 font-sans antialiased">
+    <!-- Header -->
+    <header class="bg-white border-b border-gray-200 sticky top-0 z-10">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-center h-16">
+                <div class="flex items-center space-x-3 text-sm">
+                    <span class="text-gray-600">디지털교육 성과 진단 및 효과 분석 연구</span>
+                    <span class="text-gray-300">|</span>
+                    <span class="font-semibold text-gray-900">학업성취도 검사</span>
+                </div>
             </div>
-        </header>
+        </div>
+    </header>
 
+    <!-- Main Content -->
+    <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <!-- User Info -->
-        <div class="user-info">
-            <div class="user-detail">
-                <div class="user-item">
-                    <span class="user-label">학교</span>
-                    <span class="user-value">한국초등학교</span>
-                </div>
-                <div class="user-item">
-                    <span class="user-label">학년</span>
-                    <span class="user-value">3학년</span>
-                </div>
-                <div class="user-item">
-                    <span class="user-label">반</span>
-                    <span class="user-value">1반</span>
-                </div>
-                <div class="user-item">
-                    <span class="user-label">이름</span>
-                    <span class="user-value">홍길동</span>
-                </div>
+        <div class="mb-8">
+            <h1 class="text-2xl font-bold text-gray-900 mb-2">응시 가능한 시험</h1>
+            <div class="flex items-center space-x-4 text-sm text-gray-600">
+                <span class="flex items-center">
+                    <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+                    </svg>
+                    학교: <span class="font-medium text-gray-900 ml-1">한국초등학교</span>
+                </span>
+                <span class="flex items-center">
+                    <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                    </svg>
+                    학년: <span class="font-medium text-gray-900 ml-1">3학년</span>
+                </span>
+                <span class="flex items-center">
+                    <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                    </svg>
+                    반: <span class="font-medium text-gray-900 ml-1">1반</span>
+                </span>
+                <span class="flex items-center">
+                    <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 20l4-16m2 16l4-16M6 9h14M4 15h14"></path>
+                    </svg>
+                    이름: <span class="font-medium text-gray-900 ml-1">홍길동</span>
+                </span>
             </div>
         </div>
 
         <!-- Exam Cards -->
-        <div class="exam-grid">
-            <!-- 과목 1 -->
-            <div class="exam-card available">
-                <div class="exam-header">
-                    <div class="exam-title">과목1</div>
-                    <div class="exam-subtitle">2024.11.01 ~ 2024.11.30</div>
-                </div>
+        <div class="grid gap-6 md:grid-cols-2">
+            <!-- 과목1 Card -->
+            <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden hover:shadow-md transition-shadow">
+                <div class="p-6">
+                    <div class="flex items-start justify-between mb-4">
+                        <div>
+                            <h3 class="text-lg font-semibold text-gray-900">과목1</h3>
+                            <p class="text-sm text-gray-600 mt-1">2024.11.01 ~ 2024.11.30</p>
+                        </div>
+                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
+                            응시 가능
+                        </span>
+                    </div>
+                    
+                    <div class="space-y-3 mb-6">
+                        <div class="flex items-center text-sm">
+                            <span class="text-gray-600 w-20">시험 시간</span>
+                            <span class="font-medium text-gray-900">40분</span>
+                        </div>
+                        <div class="flex items-center text-sm">
+                            <span class="text-gray-600 w-20">문항 수</span>
+                            <span class="font-medium text-gray-900">25문항</span>
+                        </div>
+                        <div class="flex items-center text-sm">
+                            <span class="text-gray-600 w-20">응시 상태</span>
+                            <span class="font-medium text-gray-900">응시 가능</span>
+                        </div>
+                    </div>
 
-                <div class="exam-info">
-                    <div class="info-row">
-                        <span class="info-label">시험 시간</span>
-                        <span class="info-value">40분</span>
+                    <div class="mb-4">
+                        <div class="bg-gray-200 rounded-full h-2">
+                            <div class="bg-gray-600 h-2 rounded-full" style="width: 0%"></div>
+                        </div>
+                        <p class="text-xs text-gray-600 mt-1">진행률 0%</p>
                     </div>
-                    <div class="info-row">
-                        <span class="info-label">문항 수</span>
-                        <span class="info-value">25문항</span>
-                    </div>
-                    <div class="info-row">
-                        <span class="info-label">응시 상태</span>
-                        <span class="info-value status-ready">응시 가능</span>
-                    </div>
-                </div>
 
-                <div class="progress-container">
-                    <div class="progress-label">
-                        <span>진행률</span>
-                        <span>0%</span>
-                    </div>
-                    <div class="progress-bar">
-                        <div class="progress-fill" style="width: 0%"></div>
-                    </div>
+                    <button onclick="startExam('과목1')" class="w-full bg-gray-900 text-white py-2 px-4 rounded-md font-medium hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900 transition-colors">
+                        응시하기
+                    </button>
                 </div>
-
-                <button class="exam-button" onclick="startExam(1)">
-                    응시하기
-                </button>
             </div>
 
-            <!-- 과목 2 -->
-            <div class="exam-card completed">
-                <div class="exam-header">
-                    <div class="exam-title">과목2</div>
-                    <div class="exam-subtitle">2024.11.01 ~ 2024.11.30</div>
-                </div>
+            <!-- 과목2 Card -->
+            <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden hover:shadow-md transition-shadow">
+                <div class="p-6">
+                    <div class="flex items-start justify-between mb-4">
+                        <div>
+                            <h3 class="text-lg font-semibold text-gray-900">과목2</h3>
+                            <p class="text-sm text-gray-600 mt-1">2024.11.01 ~ 2024.11.30</p>
+                        </div>
+                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                            응시 완료
+                        </span>
+                    </div>
+                    
+                    <div class="space-y-3 mb-6">
+                        <div class="flex items-center text-sm">
+                            <span class="text-gray-600 w-20">시험 시간</span>
+                            <span class="font-medium text-gray-900">40분</span>
+                        </div>
+                        <div class="flex items-center text-sm">
+                            <span class="text-gray-600 w-20">문항 수</span>
+                            <span class="font-medium text-gray-900">25문항</span>
+                        </div>
+                        <div class="flex items-center text-sm">
+                            <span class="text-gray-600 w-20">응시 상태</span>
+                            <span class="font-medium text-green-600">응시 완료</span>
+                        </div>
+                    </div>
 
-                <div class="exam-info">
-                    <div class="info-row">
-                        <span class="info-label">시험 시간</span>
-                        <span class="info-value">40분</span>
+                    <div class="mb-4">
+                        <div class="bg-gray-200 rounded-full h-2">
+                            <div class="bg-green-600 h-2 rounded-full" style="width: 100%"></div>
+                        </div>
+                        <p class="text-xs text-gray-600 mt-1">진행률 100%</p>
                     </div>
-                    <div class="info-row">
-                        <span class="info-label">문항 수</span>
-                        <span class="info-value">25문항</span>
-                    </div>
-                    <div class="info-row">
-                        <span class="info-label">응시 상태</span>
-                        <span class="info-value status-completed">응시 완료</span>
-                    </div>
-                </div>
 
-                <div class="progress-container">
-                    <div class="progress-label">
-                        <span>진행률</span>
-                        <span>100%</span>
-                    </div>
-                    <div class="progress-bar">
-                        <div class="progress-fill completed" style="width: 100%"></div>
-                    </div>
+                    <button disabled class="w-full bg-green-600 text-white py-2 px-4 rounded-md font-medium cursor-not-allowed opacity-75">
+                        응시완료
+                    </button>
                 </div>
-
-                <button class="exam-button completed" disabled>
-                    응시완료
-                </button>
             </div>
         </div>
-    </div>
+    </main>
 
     <script>
-        // 시험 시작 함수
-        function startExam(examNumber) {
-            if (confirm(`과목${examNumber} 시험을 시작하시겠습니까?\n\n시험을 시작하면 중간에 나갈 수 없습니다.`)) {
-                console.log(`과목${examNumber} 시험 시작`);
-                // 실제로는 시험 페이지로 이동
-                // window.location.href = `/exam/${examNumber}`;
-                alert(`과목${examNumber} 시험 페이지로 이동합니다.`);
+        function startExam(subject) {
+            // Show confirmation dialog
+            if (confirm(`${subject} 시험을 시작하시겠습니까?\n\n시험이 시작되면 40분 동안 진행됩니다.`)) {
+                showToast(`${subject} 시험을 시작합니다.`, 'success');
+                // In real app, redirect to exam page
+                // window.location.href = `/exam/${subject}`;
             }
         }
 
-        // 시험 상태 체크 (실제로는 서버에서 데이터를 받아와서 처리)
-        function checkExamStatus() {
-            // 예시: 과목1 완료 시 과목2 활성화
-            const exam1Status = localStorage.getItem('exam1_completed');
-            if (exam1Status === 'true') {
-                // 과목1 완료 상태로 변경
-                const exam1Card = document.querySelector('.exam-card:nth-child(1)');
-                const exam1Button = exam1Card.querySelector('.exam-button');
-                const exam1Progress = exam1Card.querySelector('.progress-fill');
-                const exam1StatusValue = exam1Card.querySelector('.status-ready');
-                
-                exam1Card.classList.remove('available');
-                exam1Card.classList.add('completed');
-                exam1Button.textContent = '응시완료';
-                exam1Button.classList.add('completed');
-                exam1Button.disabled = true;
-                exam1Progress.style.width = '100%';
-                exam1Progress.classList.add('completed');
-                exam1Card.querySelector('.progress-label span:last-child').textContent = '100%';
-                if (exam1StatusValue) {
-                    exam1StatusValue.textContent = '응시 완료';
-                    exam1StatusValue.classList.remove('status-ready');
-                    exam1StatusValue.classList.add('status-completed');
-                }
-
-                // 과목2 활성화
-                const exam2Card = document.querySelector('.exam-card:nth-child(2)');
-                const exam2Button = exam2Card.querySelector('.exam-button');
-                const exam2StatusValue = exam2Card.querySelector('.status-completed');
-                const exam2Progress = exam2Card.querySelector('.progress-fill');
-                
-                exam2Card.classList.remove('completed');
-                exam2Card.classList.add('available');
-                exam2Button.disabled = false;
-                exam2Button.classList.remove('completed');
-                exam2Button.textContent = '응시하기';
-                exam2Progress.style.width = '0%';
-                exam2Progress.classList.remove('completed');
-                exam2Card.querySelector('.progress-label span:last-child').textContent = '0%';
-                if (exam2StatusValue) {
-                    exam2StatusValue.textContent = '응시 가능';
-                    exam2StatusValue.classList.remove('status-completed');
-                    exam2StatusValue.classList.add('status-ready');
-                }
-            }
+        function showToast(message, type = 'info') {
+            // Remove existing toasts
+            const existingToasts = document.querySelectorAll('.toast-notification');
+            existingToasts.forEach(toast => toast.remove());
+            
+            // Create toast element
+            const toast = document.createElement('div');
+            toast.className = 'toast-notification fixed bottom-4 right-4 px-6 py-3 rounded-lg shadow-lg transform transition-all duration-500 translate-y-full z-50';
+            
+            // Set toast style based on type
+            const styles = {
+                info: 'bg-gray-900 text-white',
+                success: 'bg-green-600 text-white',
+                error: 'bg-red-600 text-white'
+            };
+            
+            toast.classList.add(...styles[type].split(' '));
+            
+            // Set toast content
+            const icons = {
+                info: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>',
+                success: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>',
+                error: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>'
+            };
+            
+            toast.innerHTML = `
+                <div class="flex items-center">
+                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        ${icons[type]}
+                    </svg>
+                    ${message}
+                </div>
+            `;
+            
+            document.body.appendChild(toast);
+            
+            // Animate toast
+            setTimeout(() => {
+                toast.classList.remove('translate-y-full');
+                toast.classList.add('translate-y-0');
+            }, 100);
+            
+            // Remove toast after delay
+            setTimeout(() => {
+                toast.classList.add('translate-y-full');
+                setTimeout(() => toast.remove(), 500);
+            }, 3000);
         }
 
-        // 페이지 로드 시 상태 체크
-        window.addEventListener('load', checkExamStatus);
+        // Add page load animation
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.bg-white');
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                setTimeout(() => {
+                    card.style.transition = 'all 0.5s ease';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, index * 100);
+            });
+        });
     </script>
 </body>
 </html>

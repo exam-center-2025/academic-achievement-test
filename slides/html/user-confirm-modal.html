@@ -3,355 +3,190 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>정보 확인</title>
+    <title>학업성취도 검사 - 정보 확인</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Inter', 'Noto Sans KR', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: #ffffff;
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-            font-size: 14px;
-            color: #212529;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-        }
-
-        /* Overlay - 심플한 배경 */
-        .overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.3);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-            animation: fadeIn 0.2s ease-out;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'sans': ['Inter', 'Noto Sans KR', 'system-ui', '-apple-system', 'sans-serif'],
+                    }
+                }
             }
         }
-
-        /* Popup Container - 미니멀한 디자인 */
-        .popup {
-            background: white;
-            border-radius: 8px;
-            width: 100%;
-            max-width: 440px;
-            border: 1px solid #e8e8e8;
-            overflow: hidden;
-            animation: slideUp 0.3s ease-out;
-        }
-
-        @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Popup Header - 심플한 헤더 */
-        .popup-header {
-            padding: 32px 32px 24px;
-            text-align: center;
-            border-bottom: 1px solid #f0f0f0;
-        }
-
-        .popup-title {
-            font-size: 20px;
-            font-weight: 600;
-            color: #000;
-            letter-spacing: -0.3px;
-        }
-
-        /* Popup Body */
-        .popup-body {
-            padding: 32px;
-        }
-
-        /* 정보 표시 영역 - 플랫한 디자인 */
-        .info-container {
-            background: #fafafa;
-            border: 1px solid #f0f0f0;
-            border-radius: 6px;
-            padding: 24px;
-            margin-bottom: 24px;
-        }
-
-        .info-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
-        }
-
-        .info-item {
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-        }
-
-        .info-label {
-            font-size: 13px;
-            color: #888;
-            font-weight: 400;
-        }
-
-        .info-value {
-            font-size: 16px;
-            color: #000;
-            font-weight: 600;
-        }
-
-        /* 이름 강조 표시 */
-        .highlight-section {
-            text-align: center;
-            padding: 24px 0;
-            border-top: 1px solid #f0f0f0;
-            margin-top: 20px;
-        }
-
-        .highlight-label {
-            font-size: 14px;
-            color: #666;
-            margin-bottom: 8px;
-        }
-
-        .highlight-name {
-            font-size: 24px;
-            color: #000;
-            font-weight: 700;
-            letter-spacing: -0.5px;
-        }
-
-        /* 확인 메시지 */
-        .confirm-message {
-            font-size: 15px;
-            color: #333;
-            text-align: center;
-            margin-bottom: 32px;
-            line-height: 1.5;
-        }
-
-        /* Buttons - exam-list와 동일한 버튼 디자인 */
-        .button-group {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
-        }
-
-        .btn {
-            padding: 14px 24px;
-            border: 1px solid #000;
-            border-radius: 6px;
-            font-size: 14px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            letter-spacing: 0.2px;
-        }
-
-        .btn-cancel {
-            background: #ffffff;
-            color: #666;
-            border-color: #e8e8e8;
-        }
-
-        .btn-cancel:hover {
-            background: #f5f5f5;
-            color: #666;
-            border-color: #e8e8e8;
-        }
-
-        .btn-cancel:active {
-            transform: scale(0.98);
-        }
-
-        .btn-confirm {
-            background: #000;
-            color: #fff;
-            border-color: #000;
-        }
-
-        .btn-confirm:hover {
-            background: #333;
-            border-color: #333;
-        }
-
-        .btn-confirm:active {
-            transform: scale(0.98);
-        }
-
-        /* 경고 메시지 - 심플한 스타일 */
-        .notice-text {
-            font-size: 13px;
-            color: #888;
-            text-align: center;
-            margin-bottom: 24px;
-            padding: 12px 16px;
-            background: #f8f8f8;
-            border-radius: 4px;
-        }
-
-        /* Responsive */
-        @media (max-width: 480px) {
-            .popup {
-                margin: 16px;
-                max-width: 100%;
-            }
-
-            .popup-header {
-                padding: 24px 24px 20px;
-            }
-
-            .popup-body {
-                padding: 24px;
-            }
-
-            .info-grid {
-                grid-template-columns: 1fr;
-                gap: 16px;
-            }
-
-            .button-group {
-                gap: 10px;
-            }
-
-            .btn {
-                font-size: 14px;
-                padding: 12px 20px;
-            }
-
-            .highlight-name {
-                font-size: 20px;
-            }
-        }
-
-        /* Hide popup initially */
-        .overlay.hidden {
-            display: none;
-        }
-    </style>
+    </script>
 </head>
-<body>
-    <!-- Popup Overlay -->
-    <div class="overlay" id="confirmationPopup">
-        <div class="popup">
-            <!-- Header -->
-            <div class="popup-header">
-                <h3 class="popup-title">입력 정보 확인</h3>
+<body class="bg-gray-900 bg-opacity-50 font-sans antialiased min-h-screen flex items-center justify-center">
+    <!-- Modal Overlay -->
+    <div class="fixed inset-0 bg-gray-900 bg-opacity-50 transition-opacity"></div>
+
+    <!-- Modal Content -->
+    <div class="relative bg-white rounded-lg shadow-xl max-w-md w-full m-4 transform transition-all">
+        <!-- Modal Header -->
+        <div class="bg-gray-50 px-6 py-4 border-b border-gray-200 rounded-t-lg">
+            <h3 class="text-lg font-semibold text-gray-900">입력 정보 확인</h3>
+        </div>
+
+        <!-- Modal Body -->
+        <div class="px-6 py-4">
+            <div class="space-y-4">
+                <!-- 학교 -->
+                <div class="flex items-center justify-between py-3 border-b border-gray-100">
+                    <span class="text-sm font-medium text-gray-600">학교</span>
+                    <span class="text-sm font-semibold text-gray-900">한국초등학교</span>
+                </div>
+
+                <!-- 학년 -->
+                <div class="flex items-center justify-between py-3 border-b border-gray-100">
+                    <span class="text-sm font-medium text-gray-600">학년</span>
+                    <span class="text-sm font-semibold text-gray-900">3학년</span>
+                </div>
+
+                <!-- 반 -->
+                <div class="flex items-center justify-between py-3 border-b border-gray-100">
+                    <span class="text-sm font-medium text-gray-600">반</span>
+                    <span class="text-sm font-semibold text-gray-900">1반</span>
+                </div>
+
+                <!-- 이름 -->
+                <div class="flex items-center justify-between py-3">
+                    <span class="text-sm font-medium text-gray-600">학생 이름</span>
+                    <span class="text-sm font-semibold text-gray-900">박종경</span>
+                </div>
             </div>
 
-            <!-- Body -->
-            <div class="popup-body">
-                <div class="info-container">
-                    <div class="info-grid">
-                        <div class="info-item">
-                            <div class="info-label">학교</div>
-                            <div class="info-value">한국초등학교</div>
-                        </div>
-                        <div class="info-item">
-                            <div class="info-label">학년</div>
-                            <div class="info-value">3학년</div>
-                        </div>
-                        <div class="info-item">
-                            <div class="info-label">반</div>
-                            <div class="info-value">1반</div>
-                        </div>
-                        <div class="info-item">
-                            <div class="info-label">이름</div>
-                            <div class="info-value">박종경</div>
+            <!-- Question -->
+            <div class="mt-6 text-center">
+                <p class="text-sm text-gray-600">위 정보가 맞으신가요?</p>
+            </div>
+
+            <!-- Warning Message -->
+            <div class="mt-4 bg-amber-50 border border-amber-200 rounded-md p-3">
+                <div class="flex">
+                    <div class="flex-shrink-0">
+                        <svg class="h-5 w-5 text-amber-400" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path>
+                        </svg>
+                    </div>
+                    <div class="ml-3">
+                        <h3 class="text-sm font-medium text-amber-800">주의사항</h3>
+                        <div class="mt-1 text-sm text-amber-700">
+                            <p>확인 후에는 정보를 변경할 수 없습니다.</p>
                         </div>
                     </div>
-                    
-                    <div class="highlight-section">
-                        <div class="highlight-label">학생 이름</div>
-                        <div class="highlight-name">박종경</div>
-                    </div>
                 </div>
+            </div>
+        </div>
 
-                <p class="confirm-message">
-                    위 정보가 맞으신가요?
-                </p>
-
-                <div class="notice-text">
-                    확인 후에는 정보를 변경할 수 없습니다.
-                </div>
-
-                <div class="button-group">
-                    <button class="btn btn-cancel" onclick="closePopup()">다시 확인</button>
-                    <button class="btn btn-confirm" onclick="confirmAndProceed()">확인</button>
-                </div>
+        <!-- Modal Footer -->
+        <div class="bg-gray-50 px-6 py-4 border-t border-gray-200 rounded-b-lg">
+            <div class="flex justify-end space-x-3">
+                <button 
+                    onclick="handleCancel()"
+                    class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 transition-colors">
+                    다시 확인
+                </button>
+                <button 
+                    onclick="handleConfirm()"
+                    class="px-4 py-2 text-sm font-medium text-white bg-gray-900 border border-transparent rounded-md hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900 transition-colors">
+                    정보가 맞습니다
+                </button>
             </div>
         </div>
     </div>
 
     <script>
-        // Initialize popup on page load
-        window.addEventListener('DOMContentLoaded', function() {
-            // Prevent body scroll when popup is open
-            document.body.style.overflow = 'hidden';
-        });
-
-        // Close popup
-        function closePopup() {
-            const popup = document.getElementById('confirmationPopup');
-            popup.classList.add('hidden');
+        function handleConfirm() {
+            // Show loading state
+            showToast('정보를 확인했습니다. 시험 목록으로 이동합니다.', 'success');
             
-            // Restore body scroll
-            document.body.style.overflow = '';
-            
-            // 실제로는 이전 페이지나 입력 폼으로 돌아감
-            console.log('정보 재입력 필요');
+            // In real app, save confirmation and redirect
+            setTimeout(() => {
+                // window.location.href = '/exam-list';
+                console.log('Confirmed and redirecting to exam list');
+            }, 1500);
         }
 
-        // Confirm and proceed
-        function confirmAndProceed() {
-            console.log('사용자 정보 확인됨');
+        function handleCancel() {
+            // Show message
+            showToast('정보를 다시 확인해주세요.', 'info');
             
-            // 실제로는 서버에 확인 상태를 저장하고 시험 목록 페이지로 이동
-            // localStorage.setItem('userConfirmed', 'true');
-            // window.location.href = '/exam-list.html';
-            
-            alert('확인되었습니다. 시험 목록으로 이동합니다.');
-            closePopup();
+            // In real app, go back to login
+            setTimeout(() => {
+                // window.location.href = '/login';
+                console.log('Going back to login');
+            }, 1500);
         }
 
-        // Close on overlay click
-        document.getElementById('confirmationPopup').addEventListener('click', function(e) {
-            if (e.target === this) {
-                closePopup();
-            }
-        });
+        function showToast(message, type = 'info') {
+            // Remove existing toasts
+            const existingToasts = document.querySelectorAll('.toast-notification');
+            existingToasts.forEach(toast => toast.remove());
+            
+            // Create toast element
+            const toast = document.createElement('div');
+            toast.className = 'toast-notification fixed bottom-4 right-4 px-6 py-3 rounded-lg shadow-lg transform transition-all duration-500 translate-y-full z-50';
+            
+            // Set toast style based on type
+            const styles = {
+                info: 'bg-gray-900 text-white',
+                success: 'bg-green-600 text-white',
+                error: 'bg-red-600 text-white'
+            };
+            
+            toast.classList.add(...styles[type].split(' '));
+            
+            // Set toast content
+            const icons = {
+                info: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>',
+                success: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>',
+                error: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>'
+            };
+            
+            toast.innerHTML = `
+                <div class="flex items-center">
+                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        ${icons[type]}
+                    </svg>
+                    ${message}
+                </div>
+            `;
+            
+            document.body.appendChild(toast);
+            
+            // Animate toast
+            setTimeout(() => {
+                toast.classList.remove('translate-y-full');
+                toast.classList.add('translate-y-0');
+            }, 100);
+            
+            // Remove toast after delay
+            setTimeout(() => {
+                toast.classList.add('translate-y-full');
+                setTimeout(() => toast.remove(), 500);
+            }, 3000);
+        }
 
-        // ESC key to close
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') {
-                closePopup();
-            }
+        // Add modal animation on load
+        document.addEventListener('DOMContentLoaded', function() {
+            const modal = document.querySelector('.relative.bg-white');
+            modal.style.opacity = '0';
+            modal.style.transform = 'scale(0.95)';
+            
+            setTimeout(() => {
+                modal.style.transition = 'all 0.3s ease';
+                modal.style.opacity = '1';
+                modal.style.transform = 'scale(1)';
+            }, 100);
         });
     </script>
 </body>

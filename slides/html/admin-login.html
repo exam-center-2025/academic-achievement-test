@@ -3,366 +3,229 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>학업성취도 검사 - 로그인</title>
+    <title>학업성취도 검사 - 관리자 로그인</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Inter', 'Noto Sans KR', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: transparent;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            padding: 20px;
-            font-size: 14px;
-            color: #212529;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-        }
-
-        .main-container {
-            background: #ffffff;
-            width: 100%;
-            max-width: 440px;
-            border-radius: 12px;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-            border: 1px solid #e9ecef;
-            overflow: hidden;
-        }
-
-        /* Login Form Section */
-        .login-section {
-            padding: 50px 40px;
-            display: flex;
-            flex-direction: column;
-            background: #ffffff;
-        }
-
-        .exam-title {
-            text-align: center;
-            margin-bottom: 40px;
-            padding-bottom: 30px;
-            border-bottom: 1px solid #e0e0e0;
-        }
-
-        .exam-main {
-            font-size: 15px;
-            color: #666666;
-            margin-bottom: 10px;
-            font-weight: 400;
-            letter-spacing: -0.2px;
-        }
-
-        .exam-sub {
-            font-size: 26px;
-            color: #333333;
-            font-weight: 700;
-            letter-spacing: -0.5px;
-        }
-
-        .form-container {
-            flex: 1;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-group label {
-            display: block;
-            color: #333333;
-            font-size: 15px;
-            font-weight: 500;
-            margin-bottom: 8px;
-        }
-
-        .form-group label::after {
-            content: ' *';
-            color: #ff6b6b;
-            font-size: 13px;
-        }
-
-        .form-group input {
-            width: 100%;
-            padding: 14px 16px;
-            border: 2px solid #e0e0e0;
-            background: #ffffff;
-            color: #333333;
-            font-size: 16px;
-            border-radius: 8px;
-            outline: none;
-            transition: all 0.2s ease;
-        }
-
-        .form-group input::placeholder {
-            color: #999999;
-            font-size: 15px;
-        }
-
-        .form-group input:hover {
-            background: #fafafa;
-            border-color: #d0d0d0;
-        }
-
-        .form-group input:focus {
-            background: #ffffff;
-            border-color: #000;
-            box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1);
-        }
-
-        /* Password visibility toggle */
-        .password-input-wrapper {
-            position: relative;
-        }
-
-        .toggle-password {
-            position: absolute;
-            right: 12px;
-            top: 50%;
-            transform: translateY(-50%);
-            background: none;
-            border: none;
-            cursor: pointer;
-            padding: 4px;
-            color: #666666;
-            transition: color 0.2s ease;
-        }
-
-        .toggle-password:hover {
-            color: #000;
-        }
-
-        .toggle-password svg {
-            width: 20px;
-            height: 20px;
-        }
-
-        .login-button {
-            width: 100%;
-            background: #000;
-            color: white;
-            padding: 16px;
-            border: none;
-            font-size: 17px;
-            font-weight: 600;
-            cursor: pointer;
-            border-radius: 8px;
-            transition: all 0.2s ease;
-            letter-spacing: -0.2px;
-            margin-top: 30px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-        }
-
-        .login-button:hover {
-            background: #333;
-            transform: translateY(-1px);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
-        }
-
-        .login-button:active {
-            transform: translateY(0);
-        }
-
-        .copyright {
-            text-align: center;
-            color: #999999;
-            font-size: 12px;
-            margin-top: 40px;
-            padding-top: 30px;
-            border-top: 1px solid #f0f0f0;
-        }
-
-        /* Error states */
-        .form-group.error input {
-            border-color: #ff6b6b;
-            background-color: rgba(255, 107, 107, 0.1);
-        }
-
-        .form-group .error-message {
-            color: #ff6b6b;
-            font-size: 13px;
-            margin-top: 4px;
-            display: none;
-        }
-
-        .form-group.error .error-message {
-            display: block;
-        }
-
-        /* Loading state */
-        .login-button.loading {
-            background: #6c757d;
-            cursor: not-allowed;
-            position: relative;
-        }
-
-        .login-button.loading::after {
-            content: '';
-            position: absolute;
-            width: 16px;
-            height: 16px;
-            top: 50%;
-            left: 50%;
-            margin-left: -8px;
-            margin-top: -8px;
-            border: 2px solid #ffffff;
-            border-radius: 50%;
-            border-top-color: transparent;
-            animation: spinner 0.8s linear infinite;
-        }
-
-        @keyframes spinner {
-            to { transform: rotate(360deg); }
-        }
-
-        /* Responsive */
-        @media (max-width: 480px) {
-            .login-section {
-                padding: 40px 25px;
-            }
-            
-            .exam-sub {
-                font-size: 22px;
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'sans': ['Inter', 'Noto Sans KR', 'system-ui', '-apple-system', 'sans-serif'],
+                    }
+                }
             }
         }
-    </style>
+    </script>
 </head>
-<body>
-    <div class="main-container">
-        <!-- Login Form Section -->
-        <div class="login-section">
-            <div class="exam-title">
-                <div class="exam-main">디지털교육 성과 진단 및 효과 분석 연구</div>
-                <div class="exam-sub">학업성취도 검사</div>
+<body class="bg-gray-50 font-sans antialiased min-h-screen flex items-center justify-center">
+    <div class="w-full max-w-md">
+        <!-- Logo/Title Section -->
+        <div class="text-center mb-8">
+            <div class="inline-flex items-center justify-center w-16 h-16 bg-gray-100 rounded-full mb-4">
+                <svg class="w-8 h-8 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+                </svg>
             </div>
-            
-            <!-- Login Form -->
-            <form id="loginForm" class="form-container">
-                <div class="form-group">
-                    <label for="userId">아이디</label>
-                    <input type="text" id="userId" name="userId" placeholder="아이디를 입력하세요" required>
-                    <span class="error-message"></span>
+            <h2 class="text-xs text-gray-600 mb-1">디지털교육 성과 진단 및 효과 분석 연구</h2>
+            <h1 class="text-2xl font-bold text-gray-900">학업성취도 검사</h1>
+        </div>
+
+        <!-- Login Form Card -->
+        <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-8">
+            <form onsubmit="handleLogin(event)">
+                <!-- 아이디 -->
+                <div class="mb-4">
+                    <label for="username" class="block text-sm font-medium text-gray-700 mb-1">
+                        아이디 <span class="text-red-500">*</span>
+                    </label>
+                    <input 
+                        type="text" 
+                        id="username" 
+                        class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent transition-colors"
+                        placeholder="아이디를 입력하세요" 
+                        required
+                        autofocus>
                 </div>
-                
-                <div class="form-group">
-                    <label for="password">비밀번호</label>
-                    <div class="password-input-wrapper">
-                        <input type="password" id="password" name="password" placeholder="비밀번호를 입력하세요" required>
-                        <button type="button" class="toggle-password" onclick="togglePassword()">
-                            <svg class="eye-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                                <circle cx="12" cy="12" r="3"></circle>
+
+                <!-- 비밀번호 -->
+                <div class="mb-6">
+                    <label for="password" class="block text-sm font-medium text-gray-700 mb-1">
+                        비밀번호 <span class="text-red-500">*</span>
+                    </label>
+                    <div class="relative">
+                        <input 
+                            type="password" 
+                            id="password" 
+                            class="w-full px-3 py-2 pr-10 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent transition-colors"
+                            placeholder="비밀번호를 입력하세요" 
+                            required>
+                        <button 
+                            type="button"
+                            onclick="togglePassword()"
+                            class="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-gray-600">
+                            <svg id="eye-icon" class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
                             </svg>
-                            <svg class="eye-closed" style="display: none;" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"></path>
-                                <line x1="1" y1="1" x2="23" y2="23"></line>
+                            <svg id="eye-off-icon" class="h-5 w-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21"></path>
                             </svg>
                         </button>
                     </div>
-                    <span class="error-message"></span>
                 </div>
-                
-                <button type="submit" class="login-button">로그인</button>
+
+                <!-- Submit Button -->
+                <button 
+                    type="submit" 
+                    class="w-full bg-gray-900 text-white py-3 px-4 rounded-md font-medium hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900 transition-colors">
+                    로그인
+                </button>
             </form>
-            
-            <div class="copyright">
-                Copyright © IOSYS Corp. All Rights Reserved.
+
+            <!-- Divider -->
+            <div class="mt-6 relative">
+                <div class="absolute inset-0 flex items-center">
+                    <div class="w-full border-t border-gray-300"></div>
+                </div>
+                <div class="relative flex justify-center text-sm">
+                    <span class="px-2 bg-white text-gray-500">관리자 전용</span>
+                </div>
             </div>
+
+            <!-- Info Section -->
+            <div class="mt-6">
+                <div class="text-center text-sm text-gray-600">
+                    <p>학교 관리자 또는 리서치 담당자만 접속 가능합니다.</p>
+                    <p class="mt-1">계정 관련 문의는 시스템 관리자에게 연락하세요.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="text-center mt-6 text-sm text-gray-500">
+            Copyright © IOSYS Corp. All Rights Reserved.
         </div>
     </div>
 
     <script>
-        // Password visibility toggle
         function togglePassword() {
-            const input = document.getElementById('password');
-            const button = input.nextElementSibling;
-            const eyeOpen = button.querySelector('.eye-open');
-            const eyeClosed = button.querySelector('.eye-closed');
+            const passwordInput = document.getElementById('password');
+            const eyeIcon = document.getElementById('eye-icon');
+            const eyeOffIcon = document.getElementById('eye-off-icon');
             
-            if (input.type === 'password') {
-                input.type = 'text';
-                eyeOpen.style.display = 'none';
-                eyeClosed.style.display = 'block';
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                eyeIcon.classList.add('hidden');
+                eyeOffIcon.classList.remove('hidden');
             } else {
-                input.type = 'password';
-                eyeOpen.style.display = 'block';
-                eyeClosed.style.display = 'none';
+                passwordInput.type = 'password';
+                eyeIcon.classList.remove('hidden');
+                eyeOffIcon.classList.add('hidden');
             }
         }
 
-        // Form validation
-        function validateForm() {
-            const form = document.getElementById('loginForm');
-            const inputs = form.querySelectorAll('input[required]');
-            let isValid = true;
+        function handleLogin(event) {
+            event.preventDefault();
             
-            inputs.forEach(input => {
-                const formGroup = input.closest('.form-group');
-                const errorMsg = formGroup.querySelector('.error-message');
-                
-                formGroup.classList.remove('error');
-                
-                if (!input.value.trim()) {
-                    formGroup.classList.add('error');
-                    errorMsg.textContent = '필수 입력 항목입니다.';
-                    isValid = false;
-                }
-            });
+            // Get form values
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
             
-            return isValid;
-        }
-
-        // Form submission
-        document.getElementById('loginForm').addEventListener('submit', function(e) {
-            e.preventDefault();
+            // Show loading toast
+            showToast('로그인 중...', 'loading');
             
-            if (!validateForm()) {
-                return;
-            }
-            
-            const button = this.querySelector('.login-button');
-            
-            // Show loading
-            button.classList.add('loading');
-            button.textContent = '';
-            
-            // Simulate login
+            // Simulate login process
             setTimeout(() => {
-                const formData = {
-                    userId: document.getElementById('userId').value,
-                    password: document.getElementById('password').value
-                };
+                // Here you would normally make an API call
+                console.log('Login attempt:', { username });
                 
-                console.log('로그인 데이터:', formData);
-                alert('로그인 처리 중...');
-                
-                button.classList.remove('loading');
-                button.textContent = '로그인';
+                // Check demo credentials
+                if (username === 'admin' && password === 'admin123') {
+                    showToast('로그인 성공! 대시보드로 이동합니다.', 'success');
+                    // Redirect to dashboard (in real app)
+                    // window.location.href = '/admin-dashboard';
+                } else {
+                    showToast('아이디 또는 비밀번호가 올바르지 않습니다.', 'error');
+                }
             }, 1500);
-        });
+        }
 
-        // Clear error messages on input
-        document.querySelectorAll('input').forEach(input => {
-            input.addEventListener('input', function() {
-                const formGroup = this.closest('.form-group');
-                formGroup.classList.remove('error');
-            });
-        });
-
-        // Handle Enter key for better UX
-        document.getElementById('userId').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                e.preventDefault();
-                document.getElementById('password').focus();
+        function showToast(message, type = 'info') {
+            // Remove existing toasts
+            const existingToasts = document.querySelectorAll('.toast-notification');
+            existingToasts.forEach(toast => toast.remove());
+            
+            // Create toast element
+            const toast = document.createElement('div');
+            toast.className = 'toast-notification fixed bottom-4 right-4 px-6 py-3 rounded-lg shadow-lg transform transition-all duration-500 translate-y-full z-50';
+            
+            // Set toast style based on type
+            const styles = {
+                info: 'bg-gray-900 text-white',
+                success: 'bg-green-600 text-white',
+                error: 'bg-red-600 text-white',
+                loading: 'bg-blue-600 text-white'
+            };
+            
+            toast.classList.add(...styles[type].split(' '));
+            
+            // Set toast content
+            const icons = {
+                info: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>',
+                success: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>',
+                error: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>',
+                loading: '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>'
+            };
+            
+            toast.innerHTML = `
+                <div class="flex items-center">
+                    <svg class="w-5 h-5 mr-2 ${type === 'loading' ? 'animate-spin' : ''}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        ${icons[type]}
+                    </svg>
+                    ${message}
+                </div>
+            `;
+            
+            document.body.appendChild(toast);
+            
+            // Animate toast
+            setTimeout(() => {
+                toast.classList.remove('translate-y-full');
+                toast.classList.add('translate-y-0');
+            }, 100);
+            
+            // Remove toast after delay (except loading)
+            if (type !== 'loading') {
+                setTimeout(() => {
+                    toast.classList.add('translate-y-full');
+                    setTimeout(() => toast.remove(), 500);
+                }, 3000);
             }
+        }
+
+        // Add enter key support
+        document.addEventListener('DOMContentLoaded', function() {
+            const inputs = document.querySelectorAll('input');
+            inputs.forEach((input, index) => {
+                input.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') {
+                        e.preventDefault();
+                        if (index < inputs.length - 1) {
+                            inputs[index + 1].focus();
+                        } else {
+                            handleLogin(e);
+                        }
+                    }
+                });
+            });
         });
     </script>
 </body>
